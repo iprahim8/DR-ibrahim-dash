@@ -1,0 +1,1490 @@
+{
+    "dashboard_title": "Dr Araby | لوحة إدارة الأكاديميات",
+    "currentMonth": "2026-11",
+    "darkMode": false,
+    "updatedAt": 1794865352847,
+    "limits": {
+        "2026-11": {
+            "qurra": {
+                "targetHours": 40,
+                "defaultRate": 60
+            },
+            "furqan": {
+                "targetHours": 16,
+                "defaultRate": 60
+            },
+            "sabeel": {
+                "targetHours": 47,
+                "defaultRate": 60
+            }
+        }
+    },
+    "academies": [
+        {
+            "id": "qurra",
+            "name": "أكاديمية القراء",
+            "short": "القراء",
+            "color": "#21a982",
+            "soft": "#e8f7f2",
+            "rate": 60,
+            "target_hours": 40,
+            "logged_hours": 13.5,
+            "students_count": 14,
+            "active_students_count": 12,
+            "weekly_sessions": 19
+        },
+        {
+            "id": "furqan",
+            "name": "أكاديمية الفرقان",
+            "short": "الفرقان",
+            "color": "#3979d6",
+            "soft": "#eaf1ff",
+            "rate": 60,
+            "target_hours": 16,
+            "logged_hours": 7.5,
+            "students_count": 4,
+            "active_students_count": 3,
+            "weekly_sessions": 7
+        },
+        {
+            "id": "sabeel",
+            "name": "أكاديمية سبيل",
+            "short": "سبيل",
+            "color": "#d65c78",
+            "soft": "#fff0f3",
+            "rate": 60,
+            "target_hours": 47,
+            "logged_hours": 16.5,
+            "students_count": 10,
+            "active_students_count": 10,
+            "weekly_sessions": 14
+        }
+    ],
+    "students": [
+        {
+            "id": "stu_1794865285460",
+            "name": "محمود",
+            "academy": "furqan",
+            "active": false,
+            "status": "inactive",
+            "rate": 60,
+            "schedule": "السبت 5:00 - 5:30، الثلاثاء 5:00 - 5:30",
+            "target_hours": 4,
+            "targetHours": 4,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "السبت",
+                    "time": "5:00 - 5:30",
+                    "sortOrder": 500,
+                    "duration": 0.5,
+                    "durationText": "30 دقيقة"
+                },
+                {
+                    "day": "الثلاثاء",
+                    "time": "5:00 - 5:30",
+                    "sortOrder": 500,
+                    "duration": 0.5,
+                    "durationText": "30 دقيقة"
+                }
+            ]
+        },
+        {
+            "id": "st_1794754730626",
+            "name": "ياسين محمد",
+            "academy": "qurra",
+            "active": false,
+            "status": "inactive",
+            "rate": 60,
+            "schedule": "ملغي",
+            "target_hours": 1,
+            "targetHours": 1,
+            "default_duration": 1,
+            "defaultDuration": 1,
+            "slots": []
+        },
+        {
+            "id": "st_1794673739698",
+            "name": "أحمد السيد",
+            "academy": "sabeel",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الأحد 9:00-8:00، الأربعاء 10:00-9:00",
+            "target_hours": 8,
+            "targetHours": 8,
+            "default_duration": 1,
+            "defaultDuration": 1,
+            "slots": [
+                {
+                    "day": "الأحد",
+                    "time": "8:00 - 9:00",
+                    "sortOrder": 800,
+                    "durationText": "60 دقيقة",
+                    "duration": 1
+                },
+                {
+                    "day": "الأربعاء",
+                    "time": "9:00 - 10:00",
+                    "sortOrder": 900,
+                    "durationText": "60 دقيقة",
+                    "duration": 1
+                }
+            ]
+        },
+        {
+            "id": "qurra_1",
+            "name": "عبد الرحمن",
+            "academy": "qurra",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "السبت 5:30 - 6:00، الإثنين 5:30 - 6:00",
+            "target_hours": 4,
+            "targetHours": 4,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "السبت",
+                    "time": "5:30 - 6:00",
+                    "sortOrder": 530,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                },
+                {
+                    "day": "الإثنين",
+                    "time": "5:30 - 6:00",
+                    "sortOrder": 530,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "qurra_2",
+            "name": "آسر",
+            "academy": "qurra",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "السبت 6:00 - 6:30، الإثنين 6:00 - 6:30",
+            "target_hours": 4,
+            "targetHours": 4,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "السبت",
+                    "time": "6:00 - 6:30",
+                    "sortOrder": 600,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                },
+                {
+                    "day": "الإثنين",
+                    "time": "6:00 - 6:30",
+                    "sortOrder": 600,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "qurra_3",
+            "name": "أنس أحمد",
+            "academy": "qurra",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "السبت 8:30 - 9:30 (60 دقيقة)",
+            "target_hours": 4,
+            "targetHours": 4,
+            "default_duration": 1,
+            "defaultDuration": 1,
+            "slots": [
+                {
+                    "day": "السبت",
+                    "time": "8:30 - 9:30",
+                    "sortOrder": 830,
+                    "durationText": "60 دقيقة",
+                    "duration": 1
+                }
+            ]
+        },
+        {
+            "id": "qurra_4",
+            "name": "ساجد",
+            "academy": "qurra",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الأحد 12:30 - 1:00، الأربعاء 6:30 - 7:00",
+            "target_hours": 4,
+            "targetHours": 4,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "الأحد",
+                    "time": "12:30 - 1:00",
+                    "sortOrder": 130,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                },
+                {
+                    "day": "الأربعاء",
+                    "time": "6:30 - 7:00",
+                    "sortOrder": 630,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "qurra_5",
+            "name": "آزاد",
+            "academy": "qurra",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الأحد 1:00 - 1:30، الأربعاء 7:00 - 7:30",
+            "target_hours": 4,
+            "targetHours": 4,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "الأحد",
+                    "time": "1:00 - 1:30",
+                    "sortOrder": 200,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                },
+                {
+                    "day": "الأربعاء",
+                    "time": "7:00 - 7:30",
+                    "sortOrder": 700,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "qurra_6",
+            "name": "ياسين سامي",
+            "academy": "qurra",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الأحد 5:30 - 6:00",
+            "target_hours": 2,
+            "targetHours": 2,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "الأحد",
+                    "time": "5:30 - 6:00",
+                    "sortOrder": 530,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "qurra_7",
+            "name": "يحيى حسن",
+            "academy": "qurra",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الأحد 6:30 - 7:00، الثلاثاء 7:30 - 8:00",
+            "target_hours": 4,
+            "targetHours": 4,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "الأحد",
+                    "time": "6:30 - 7:00",
+                    "sortOrder": 630,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                },
+                {
+                    "day": "الثلاثاء",
+                    "time": "7:30 - 8:00",
+                    "sortOrder": 730,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "qurra_8",
+            "name": "حمزة عمرو",
+            "academy": "qurra",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الأحد 7:30 - 8:00، الأربعاء 7:30 - 8:00",
+            "target_hours": 4,
+            "targetHours": 4,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "الأحد",
+                    "time": "7:30 - 8:00",
+                    "sortOrder": 730,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                },
+                {
+                    "day": "الأربعاء",
+                    "time": "7:30 - 8:00",
+                    "sortOrder": 730,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "qurra_9",
+            "name": "عبد الرحمن أحمد",
+            "academy": "qurra",
+            "active": false,
+            "status": "inactive",
+            "rate": 60,
+            "schedule": "الأحد 9:00 - 9:30، الثلاثاء 9:00 - 9:30",
+            "target_hours": 4,
+            "targetHours": 4,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "الأحد",
+                    "time": "9:00 - 9:30",
+                    "sortOrder": 900,
+                    "duration": 0.5,
+                    "durationText": "30 دقيقة"
+                },
+                {
+                    "day": "الثلاثاء",
+                    "time": "9:00 - 9:30",
+                    "sortOrder": 900,
+                    "duration": 0.5,
+                    "durationText": "30 دقيقة"
+                }
+            ]
+        },
+        {
+            "id": "qurra_10",
+            "name": "أمير محمود",
+            "academy": "qurra",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الثلاثاء 6:00 - 6:30، الخميس 3:00 - 3:30",
+            "target_hours": 4,
+            "targetHours": 4,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "الثلاثاء",
+                    "time": "6:00 - 6:30",
+                    "sortOrder": 600,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                },
+                {
+                    "day": "الخميس",
+                    "time": "3:00 - 3:30",
+                    "sortOrder": 300,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "qurra_11",
+            "name": "محمد ممدوح",
+            "academy": "qurra",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الأربعاء 5:30 - 6:00",
+            "target_hours": 2,
+            "targetHours": 2,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "الأربعاء",
+                    "time": "5:30 - 6:00",
+                    "sortOrder": 530,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "qurra_12",
+            "name": "ياسين ممدوح",
+            "academy": "qurra",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الأربعاء 6:00 - 6:30",
+            "target_hours": 2,
+            "targetHours": 2,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "الأربعاء",
+                    "time": "6:00 - 6:30",
+                    "sortOrder": 600,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "qurra_13",
+            "name": "يوسف ممدوح",
+            "academy": "qurra",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الخميس 2:00 - 2:30",
+            "target_hours": 2,
+            "targetHours": 2,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "الخميس",
+                    "time": "2:00 - 2:30",
+                    "sortOrder": 200,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "furqan_1",
+            "name": "أنس محمود",
+            "academy": "furqan",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "السبت 6:30 - 7:00، الثلاثاء 6:30 - 7:00",
+            "target_hours": 6,
+            "targetHours": 6,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "السبت",
+                    "time": "6:30 - 7:00",
+                    "sortOrder": 630,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                },
+                {
+                    "day": "الثلاثاء",
+                    "time": "6:30 - 7:00",
+                    "sortOrder": 630,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "furqan_2",
+            "name": "عبد الرحمن صلاح",
+            "academy": "furqan",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الأحد بعد الظهر، الثلاثاء بعد الظهر",
+            "target_hours": 4,
+            "targetHours": 4,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "الأحد",
+                    "time": "بعد الظهر",
+                    "sortOrder": 100,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                },
+                {
+                    "day": "الثلاثاء",
+                    "time": "بعد الظهر",
+                    "sortOrder": 100,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "furqan_3",
+            "name": "أحمد وائل",
+            "academy": "furqan",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الأحد 10:00-9:30، الثلاثاء 8:00-8:30، الجمعة 4:30-5:00",
+            "target_hours": 6,
+            "targetHours": 6,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "الأحد",
+                    "time": "9:30 - 10:00",
+                    "sortOrder": 930,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                },
+                {
+                    "day": "الثلاثاء",
+                    "time": "8:00 - 8:30",
+                    "sortOrder": 800,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                },
+                {
+                    "day": "الجمعة",
+                    "time": "4:30 - 5:00",
+                    "sortOrder": 430,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "sabeel_1",
+            "name": "سيف، لارا، جوري",
+            "academy": "sabeel",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "السبت، الإثنين، الجمعة | بعد الظهر (60 دقيقة)",
+            "target_hours": 12,
+            "targetHours": 12,
+            "default_duration": 1,
+            "defaultDuration": 1,
+            "slots": [
+                {
+                    "day": "السبت",
+                    "time": "بعد الظهر",
+                    "sortOrder": 100,
+                    "durationText": "60 دقيقة",
+                    "duration": 1
+                },
+                {
+                    "day": "الإثنين",
+                    "time": "بعد الظهر",
+                    "sortOrder": 100,
+                    "durationText": "60 دقيقة",
+                    "duration": 1
+                },
+                {
+                    "day": "الجمعة",
+                    "time": "بعد الظهر",
+                    "sortOrder": 100,
+                    "durationText": "60 دقيقة",
+                    "duration": 1
+                }
+            ]
+        },
+        {
+            "id": "sabeel_2",
+            "name": "أحمد عيد",
+            "academy": "sabeel",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "السبت 2:00 - 2:30",
+            "target_hours": 2,
+            "targetHours": 2,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "السبت",
+                    "time": "2:00 - 2:30",
+                    "sortOrder": 200,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "sabeel_3",
+            "name": "عمرو عيد",
+            "academy": "sabeel",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "السبت 2:30 - 3:00",
+            "target_hours": 2,
+            "targetHours": 2,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "السبت",
+                    "time": "2:30 - 3:00",
+                    "sortOrder": 230,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "sabeel_4",
+            "name": "آدم محمود",
+            "academy": "sabeel",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "السبت 4:00 - 5:00 (60 دقيقة)",
+            "target_hours": 4,
+            "targetHours": 4,
+            "default_duration": 1,
+            "defaultDuration": 1,
+            "slots": [
+                {
+                    "day": "السبت",
+                    "time": "4:00 - 5:00",
+                    "sortOrder": 400,
+                    "durationText": "60 دقيقة",
+                    "duration": 1
+                }
+            ]
+        },
+        {
+            "id": "sabeel_5",
+            "name": "عمر عصام",
+            "academy": "sabeel",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "السبت 9:30 - 10:00",
+            "target_hours": 2,
+            "targetHours": 2,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "السبت",
+                    "time": "9:30 - 10:00",
+                    "sortOrder": 930,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "sabeel_6",
+            "name": "سيف وروان",
+            "academy": "sabeel",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الإثنين 8:00 - 9:00، الأربعاء 8:00 - 9:00 (60 دقيقة)",
+            "target_hours": 8,
+            "targetHours": 8,
+            "default_duration": 1,
+            "defaultDuration": 1,
+            "slots": [
+                {
+                    "day": "الإثنين",
+                    "time": "8:00 - 9:00",
+                    "sortOrder": 800,
+                    "durationText": "60 دقيقة",
+                    "duration": 1
+                },
+                {
+                    "day": "الأربعاء",
+                    "time": "8:00 - 9:00",
+                    "sortOrder": 800,
+                    "durationText": "60 دقيقة",
+                    "duration": 1
+                }
+            ]
+        },
+        {
+            "id": "sabeel_7",
+            "name": "ياسين محمود",
+            "academy": "sabeel",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الثلاثاء 5:30 - 6:00",
+            "target_hours": 2,
+            "targetHours": 2,
+            "default_duration": 0.5,
+            "defaultDuration": 0.5,
+            "slots": [
+                {
+                    "day": "الثلاثاء",
+                    "time": "5:30 - 6:00",
+                    "sortOrder": 530,
+                    "durationText": "30 دقيقة",
+                    "duration": 0.5
+                }
+            ]
+        },
+        {
+            "id": "sabeel_8",
+            "name": "أحمد ونور",
+            "academy": "sabeel",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الخميس 4:00 - 4:45 (45 دقيقة)",
+            "target_hours": 3,
+            "targetHours": 3,
+            "default_duration": 0.75,
+            "defaultDuration": 0.75,
+            "slots": [
+                {
+                    "day": "الخميس",
+                    "time": "4:00 - 4:45",
+                    "sortOrder": 400,
+                    "durationText": "45 دقيقة",
+                    "duration": 0.75
+                }
+            ]
+        },
+        {
+            "id": "sabeel_9",
+            "name": "أحمد عمرو",
+            "academy": "sabeel",
+            "active": true,
+            "status": "active",
+            "rate": 60,
+            "schedule": "الخميس 5:30 - 6:30 (60 دقيقة)",
+            "target_hours": 4,
+            "targetHours": 4,
+            "default_duration": 1,
+            "defaultDuration": 1,
+            "slots": [
+                {
+                    "day": "الخميس",
+                    "time": "5:30 - 6:30",
+                    "sortOrder": 530,
+                    "durationText": "60 دقيقة",
+                    "duration": 1
+                }
+            ]
+        }
+    ],
+    "sessions": [
+        {
+            "id": "ses_1794854468960",
+            "studentId": "qurra_8",
+            "studentName": "حمزة عمرو",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-16",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794853260266",
+            "studentId": "sabeel_1",
+            "studentName": "سيف، لارا، جوري",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-16",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794847614572",
+            "studentId": "qurra_2",
+            "studentName": "آسر",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-16",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794847613143",
+            "studentId": "qurra_1",
+            "studentName": "عبد الرحمن",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-16",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794771380755",
+            "studentId": "qurra_9",
+            "studentName": "عبد الرحمن أحمد",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794771343098",
+            "studentId": "st_1794673739698",
+            "studentName": "أحمد السيد",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794763106512",
+            "studentId": "qurra_7",
+            "studentName": "يحيى حسن",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794758672642",
+            "studentId": "qurra_6",
+            "studentName": "ياسين سامي",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756629804",
+            "studentId": "sabeel_8",
+            "studentName": "أحمد ونور",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.75,
+            "rate": 60,
+            "amount": 45,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756628827",
+            "studentId": "sabeel_8",
+            "studentName": "أحمد ونور",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.75,
+            "rate": 60,
+            "amount": 45,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756596890",
+            "studentId": "sabeel_9",
+            "studentName": "أحمد عمرو",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756596315",
+            "studentId": "sabeel_9",
+            "studentName": "أحمد عمرو",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756544444",
+            "studentId": "sabeel_6",
+            "studentName": "سيف وروان",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756543681",
+            "studentId": "sabeel_6",
+            "studentName": "سيف وروان",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756542141",
+            "studentId": "sabeel_6",
+            "studentName": "سيف وروان",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756541488",
+            "studentId": "sabeel_6",
+            "studentName": "سيف وروان",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756496831",
+            "studentId": "sabeel_7",
+            "studentName": "ياسين محمود",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756496097",
+            "studentId": "sabeel_7",
+            "studentName": "ياسين محمود",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756375756",
+            "studentId": "sabeel_3",
+            "studentName": "عمرو عيد",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756373154",
+            "studentId": "sabeel_2",
+            "studentName": "أحمد عيد",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756346694",
+            "studentId": "sabeel_1",
+            "studentName": "سيف، لارا، جوري",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756340118",
+            "studentId": "sabeel_1",
+            "studentName": "سيف، لارا، جوري",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756332132",
+            "studentId": "sabeel_1",
+            "studentName": "سيف، لارا، جوري",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756331043",
+            "studentId": "sabeel_1",
+            "studentName": "سيف، لارا، جوري",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794756222989",
+            "studentId": "sabeel_5",
+            "studentName": "عمر عصام",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794755082963",
+            "studentId": "furqan_3",
+            "studentName": "أحمد وائل",
+            "academy": "furqan",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794755082248",
+            "studentId": "furqan_3",
+            "studentName": "أحمد وائل",
+            "academy": "furqan",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794755081283",
+            "studentId": "furqan_3",
+            "studentName": "أحمد وائل",
+            "academy": "furqan",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794755080687",
+            "studentId": "furqan_3",
+            "studentName": "أحمد وائل",
+            "academy": "furqan",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794755080041",
+            "studentId": "furqan_3",
+            "studentName": "أحمد وائل",
+            "academy": "furqan",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794755079544",
+            "studentId": "furqan_3",
+            "studentName": "أحمد وائل",
+            "academy": "furqan",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794755053824",
+            "studentId": "furqan_2",
+            "studentName": "عبد الرحمن صلاح",
+            "academy": "furqan",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794755047677",
+            "studentId": "furqan_2",
+            "studentName": "عبد الرحمن صلاح",
+            "academy": "furqan",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754986613",
+            "studentId": "furqan_1",
+            "studentName": "أنس محمود",
+            "academy": "furqan",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754985820",
+            "studentId": "furqan_1",
+            "studentName": "أنس محمود",
+            "academy": "furqan",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754985005",
+            "studentId": "furqan_1",
+            "studentName": "أنس محمود",
+            "academy": "furqan",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754856891",
+            "studentId": "qurra_12",
+            "studentName": "ياسين ممدوح",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754853638",
+            "studentId": "qurra_11",
+            "studentName": "محمد ممدوح",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754843586",
+            "studentId": "qurra_10",
+            "studentName": "أمير محمود",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754843019",
+            "studentId": "qurra_10",
+            "studentName": "أمير محمود",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754814696",
+            "studentId": "qurra_9",
+            "studentName": "عبد الرحمن أحمد",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754805322",
+            "studentId": "qurra_8",
+            "studentName": "حمزة عمرو",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754787271",
+            "studentId": "qurra_8",
+            "studentName": "حمزة عمرو",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754781152",
+            "studentId": "qurra_7",
+            "studentName": "يحيى حسن",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754777375",
+            "studentId": "qurra_6",
+            "studentName": "ياسين سامي",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754761234",
+            "studentId": "st_1794754730626",
+            "studentName": "ياسين محمد",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 1,
+            "rate": 60,
+            "amount": 60,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754696043",
+            "studentId": "qurra_5",
+            "studentName": "آزاد",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754695370",
+            "studentId": "qurra_5",
+            "studentName": "آزاد",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754694673",
+            "studentId": "qurra_5",
+            "studentName": "آزاد",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754693361",
+            "studentId": "qurra_4",
+            "studentName": "ساجد",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754692907",
+            "studentId": "qurra_4",
+            "studentName": "ساجد",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754692439",
+            "studentId": "qurra_4",
+            "studentName": "ساجد",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754671209",
+            "studentId": "qurra_2",
+            "studentName": "آسر",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794754669874",
+            "studentId": "qurra_1",
+            "studentName": "عبد الرحمن",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-15",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794690594069",
+            "studentId": "sabeel_5",
+            "studentName": "عمر عصام",
+            "academy": "sabeel",
+            "month": "2026-11",
+            "date": "2026-11-14",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794678296334",
+            "studentId": "qurra_2",
+            "studentName": "آسر",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-14",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794678265474",
+            "studentId": "furqan_1",
+            "studentName": "أنس محمود",
+            "academy": "furqan",
+            "month": "2026-11",
+            "date": "2026-11-14",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        },
+        {
+            "id": "ses_1794671735124",
+            "studentId": "qurra_1",
+            "studentName": "عبد الرحمن",
+            "academy": "qurra",
+            "month": "2026-11",
+            "date": "2026-11-14",
+            "duration": 0.5,
+            "rate": 60,
+            "amount": 30,
+            "notes": "حصة مسجلة"
+        }
+    ]
+}

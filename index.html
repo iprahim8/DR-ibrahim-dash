@@ -1,0 +1,2222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101a2b">
+<title>Dr Araby | لوحة إدارة الأكاديميات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+:root{
+  --bg:#f1f5f9;
+  --bg-accent:radial-gradient(1100px 500px at 85% -10%,rgba(13,155,120,.08),transparent 60%),radial-gradient(900px 450px at 10% -5%,rgba(57,121,214,.07),transparent 55%);
+  --surface:#ffffff;
+  --surface-glass:rgba(255,255,255,.86);
+  --surface-2:#f8fafc;
+  --surface-3:#f1f5f9;
+  --text:#0f172a;
+  --text-secondary:#334155;
+  --muted:#64748b;
+  --line:#e2e8f0;
+  --line-strong:#cbd5e1;
+  --nav:#0b1322;
+  --nav-2:#131f35;
+  --nav-muted:#94a3b8;
+  --primary:#0d9b78;
+  --primary-dark:#08785e;
+  --primary-soft:#e6f7f2;
+  --gold:#d97706;
+  --blue:#2563eb;
+  --rose:#e11d48;
+  --shadow-sm:0 2px 8px rgba(15,23,42,.04);
+  --shadow:0 10px 30px -5px rgba(15,23,42,.06),0 4px 12px -2px rgba(15,23,42,.03);
+  --shadow-lg:0 20px 45px -10px rgba(15,23,42,.12);
+  --radius:18px;
+  --sidebar-w:272px;
+}
+.dark{
+  --bg:#070d19;
+  --bg-accent:radial-gradient(1100px 500px at 85% -10%,rgba(13,155,120,.12),transparent 60%),radial-gradient(900px 450px at 10% -5%,rgba(57,121,214,.1),transparent 55%);
+  --surface:#0f172a;
+  --surface-glass:rgba(15,23,42,.84);
+  --surface-2:#162033;
+  --surface-3:#1e293b;
+  --text:#f8fafc;
+  --text-secondary:#cbd5e1;
+  --muted:#94a3b8;
+  --line:#1e293b;
+  --line-strong:#334155;
+  --nav:#050911;
+  --nav-2:#0d1526;
+  --primary-soft:rgba(13,155,120,.16);
+  --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+  --shadow:0 12px 32px -4px rgba(0,0,0,.35);
+  --shadow-lg:0 24px 50px -12px rgba(0,0,0,.55);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);background-image:var(--bg-accent);background-attachment:fixed;color:var(--text);font-family:'Cairo',sans-serif;font-size:14px;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;user-select:none}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid rgba(13,155,120,.32);outline-offset:2px}
+::selection{background:rgba(13,155,120,.22)}
+::-webkit-scrollbar{width:7px;height:7px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:99px}
+
+.app{min-height:100vh;position:relative}
+.sidebar-overlay{position:fixed;inset:0;background:rgba(7,13,25,.55);backdrop-filter:blur(3px);z-index:35;opacity:0;pointer-events:none;transition:opacity .28s ease}
+.sidebar-overlay.show{opacity:1;pointer-events:auto}
+
+.sidebar{position:fixed;inset:0 0 0 auto;width:var(--sidebar-w);background:linear-gradient(180deg,var(--nav) 0%,var(--nav-2) 100%);color:#fff;padding:20px 16px;display:flex;flex-direction:column;z-index:40;border-left:1px solid rgba(255,255,255,.07);box-shadow:-12px 0 36px rgba(0,0,0,.18);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+body.sidebar-closed .sidebar{transform:translateX(105%);box-shadow:none}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:4px 6px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.brand-info{display:flex;align-items:center;gap:12px;min-width:0}
+.brand-mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#34d399,#059669);display:grid;place-items:center;color:#042f2e;font-size:21px;font-weight:900;box-shadow:0 8px 20px rgba(16,185,129,.32);flex:none}
+.brand h1{font-size:17px;margin:0;font-weight:900;letter-spacing:-.3px;white-space:nowrap}
+.brand p{margin:2px 0 0;color:#94a3b8;font-size:10px;font-weight:700;letter-spacing:.8px}
+.sidebar-close-btn{width:34px;height:34px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#cbd5e1;display:grid;place-items:center;padding:0;transition:.18s;flex:none}
+.sidebar-close-btn:hover{background:rgba(255,255,255,.14);color:#fff;transform:scale(1.04)}
+.sidebar-close-btn svg{width:17px;height:17px}
+
+.nav-caption{color:#64748b;font-size:10px;font-weight:800;letter-spacing:.8px;padding:20px 10px 8px;text-transform:uppercase}
+.nav-list{display:grid;gap:4px}
+.nav-item{width:100%;border:1px solid transparent;background:transparent;color:var(--nav-muted);display:flex;align-items:center;gap:11px;text-align:right;padding:10px 12px;border-radius:12px;font-weight:700;font-size:13px;transition:.18s;position:relative}
+.nav-item svg{width:18px;height:18px;flex:none;transition:transform .18s}
+.nav-item:hover{background:rgba(255,255,255,.06);color:#fff}
+.nav-item:hover svg{transform:scale(1.08)}
+.nav-item.active{background:linear-gradient(100deg,#0d9b78,#06745b);color:#fff;border-color:rgba(255,255,255,.14);box-shadow:0 8px 20px rgba(13,155,120,.28)}
+.nav-item .nav-dot{width:9px;height:9px;border-radius:50%;margin-inline:4px;box-shadow:0 0 0 3px rgba(255,255,255,.06);flex:none}
+.nav-badge{margin-right:auto;font-size:10px;font-weight:800;padding:2px 8px;border-radius:99px;background:rgba(255,255,255,.08);color:#cbd5e1;font-variant-numeric:tabular-nums}
+.nav-item.active .nav-badge{background:rgba(255,255,255,.22);color:#fff}
+
+.sidebar-bottom{margin-top:auto;padding-top:14px}
+.academy-mini{border:1px solid rgba(255,255,255,.1);background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-radius:15px;padding:14px;margin:0 2px 10px}
+.academy-mini-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.academy-mini strong{font-size:12px;font-weight:800}
+.academy-mini span.mini-pct{font-size:11px;font-weight:900;color:#34d399}
+.academy-mini p{color:#94a3b8;font-size:10px;margin:2px 0 10px}
+.mini-dots{display:flex;gap:6px}
+.mini-dots span{height:5px;flex:1;border-radius:8px}
+
+.main{margin-right:var(--sidebar-w);min-height:100vh;transition:margin-right .3s cubic-bezier(.22,1,.36,1)}
+body.sidebar-closed .main{margin-right:0}
+
+.topbar{height:74px;padding:0 30px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--surface-glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:25}
+.top-left{display:flex;align-items:center;gap:12px;min-width:0}
+.sidebar-toggle-btn{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--text);display:grid;place-items:center;padding:0;transition:.18s;box-shadow:var(--shadow-sm);flex:none}
+.sidebar-toggle-btn:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-soft);transform:translateY(-1px)}
+.sidebar-toggle-btn svg{width:19px;height:19px}
+.page-kicker{font-size:11px;color:var(--muted);font-weight:700}
+.page-title{font-size:18px;font-weight:900;margin:0;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.top-actions{display:flex;align-items:center;gap:8px;flex-wrap: nowrap}
+.month-select,.icon-btn,.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:12px;padding:8px 13px;font-weight:700;font-size:12px;box-shadow:var(--shadow-sm)}
+.month-select{min-width:138px;cursor:pointer}
+.icon-btn{width:40px;height:40px;display:grid;place-items:center;padding:0;flex:none}
+.icon-btn svg{width:17px;height:17px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:.18s;white-space:nowrap}
+.btn:hover,.icon-btn:hover{transform:translateY(-1px);border-color:var(--line-strong)}
+.btn:active,.icon-btn:active{transform:translateY(0)}
+.btn svg{width:15px;height:15px;flex:none}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-color:transparent;color:#fff;box-shadow:0 6px 16px rgba(13,155,120,.28)}
+.btn-primary:hover{filter:brightness(1.06);border-color:transparent}
+.btn-soft{background:var(--primary-soft);color:var(--primary);border-color:rgba(13,155,120,.2);box-shadow:none}
+.btn-soft:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+.btn-danger{background:rgba(225,29,72,.08);color:#e11d48;border-color:rgba(225,29,72,.2);box-shadow:none}
+.btn-danger:hover{background:#e11d48;color:#fff;border-color:#e11d48}
+
+.content{max-width:1480px;margin:auto;padding:26px 30px 40px}
+.welcome{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.welcome h2{font-size:22px;margin:0;font-weight:900;letter-spacing:-.4px}
+.welcome p{color:var(--muted);margin:4px 0 0;font-size:12.5px;font-weight:500}
+.date-chip{display:inline-flex;align-items:center;gap:8px;color:var(--text-secondary);font-size:11.5px;font-weight:700;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:7px 14px;box-shadow:var(--shadow-sm)}
+.date-chip svg{width:15px;height:15px;color:var(--primary)}
+
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-bottom:20px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);min-width:0;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.kpi:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.kpi-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.kpi-label{color:var(--muted);font-size:11.5px;font-weight:800}
+.kpi-icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none}
+.kpi-icon svg{width:19px;height:19px}
+.kpi-value{font-size:26px;font-weight:900;line-height:1.3;margin-top:10px;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.kpi-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:10.5px;margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}
+.kpi-foot strong{color:var(--text);font-weight:800;font-variant-numeric:tabular-nums}
+.progress{height:7px;background:var(--surface-3);border-radius:99px;overflow:hidden;margin-top:10px}
+.progress span{display:block;height:100%;border-radius:99px;transition:width .4s cubic-bezier(.22,1,.36,1)}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:17px 22px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.panel-title{font-size:15px;font-weight:900;margin:0;display:flex;align-items:center;gap:8px}
+.panel-sub{color:var(--muted);font-size:11px;margin:3px 0 0;font-weight:500}
+.panel-body{padding:20px 22px}
+.section-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(290px,.85fr);gap:18px;margin-bottom:20px}
+
+.academies{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:14px}
+.academy-card{border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--surface-2);position:relative;overflow:hidden;transition:.2s;cursor:pointer}
+.academy-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--academy)}
+.academy-card:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--academy)}
+.academy-top{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.academy-name{display:flex;align-items:center;gap:8px;font-weight:900;font-size:13px}
+.academy-dot{width:9px;height:9px;border-radius:50%;background:var(--academy)}
+.academy-actions{display:inline-flex;align-items:center;gap:4px}
+.ac-icon-btn{width:25px;height:25px;border-radius:7px;border:1px solid var(--line);background:var(--surface);color:var(--muted);display:inline-grid;place-items:center;padding:0;transition:.15s}
+.ac-icon-btn:hover{border-color:var(--academy);color:var(--text);transform:scale(1.05)}
+.ac-icon-btn.del:hover{border-color:rgba(225,29,72,.35);color:var(--danger);background:#fff1f2}
+.ac-icon-btn svg{width:12.5px;height:12.5px}
+.color-swatches{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.color-swatch{width:32px;height:32px;border-radius:10px;border:2px solid transparent;cursor:pointer;display:grid;place-items:center;transition:.15s;position:relative}
+.color-swatch:hover{transform:scale(1.08)}
+.color-swatch.active{border-color:var(--text);box-shadow:0 0 0 3px var(--primary-glow)}
+.color-swatch svg{width:15px;height:15px;color:#fff;opacity:0;transition:.15s}
+.color-swatch.active svg{opacity:1}
+.academy-count{font-size:10.5px;color:var(--muted);margin-top:6px;font-weight:600}
+.academy-numbers{display:flex;justify-content:space-between;align-items:flex-end;margin:15px 0 10px}
+.academy-hours{font-size:21px;font-weight:900;font-variant-numeric:tabular-nums}
+.academy-money{font-size:12.5px;font-weight:900;color:var(--academy);background:var(--surface);padding:3px 9px;border-radius:8px;border:1px solid var(--line);font-variant-numeric:tabular-nums}
+.academy-meta{font-size:10px;color:var(--muted);font-weight:600}
+
+.activity-list{display:grid;gap:10px}
+.activity{display:flex;align-items:center;gap:11px;padding:8px 10px;border-radius:12px;background:var(--surface-2);border:1px solid transparent;transition:.15s}
+.activity:hover{border-color:var(--line)}
+.activity-mark{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;flex:none}
+.activity-mark svg{width:16px;height:16px}
+.activity-info{min-width:0;flex:1}
+.activity-info strong{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.activity-info small{display:block;color:var(--muted);font-size:10.5px;margin-top:2px}
+.activity-value{font-size:12px;font-weight:900;color:var(--primary);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+.charts-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:20px}
+.chart-box{display:flex;flex-direction:column;justify-content:space-between;min-height:290px}
+.donut-wrap{display:flex;align-items:center;gap:18px;justify-content:center;flex-wrap:wrap;margin:6px 0 12px}
+.donut-svg-box{position:relative;width:152px;height:152px;display:grid;place-items:center;flex:none}
+.donut-svg-box svg{width:152px;height:152px;transform:rotate(-90deg)}
+.donut-seg{transition:stroke-dasharray .5s cubic-bezier(.22,1,.36,1),stroke-width .2s;cursor:pointer}
+.donut-seg:hover{stroke-width:22}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none}
+.donut-center strong{font-size:22px;font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums}
+.donut-center small{font-size:10px;color:var(--muted);font-weight:700;margin-top:2px}
+.donut-legend{display:grid;gap:8px;flex:1;min-width:150px}
+.legend-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line);font-size:11px}
+.legend-left{display:flex;align-items:center;gap:7px;font-weight:800}
+.legend-dot{width:9px;height:9px;border-radius:50%;flex:none}
+.legend-val{font-weight:900;font-variant-numeric:tabular-nums;color:var(--text-secondary)}
+
+.vbars-wrap{display:flex;flex-direction:column;justify-content:space-between;height:100%;gap:12px}
+.vbars{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:end;height:175px;padding:18px 4px 4px;border-bottom:1px solid var(--line)}
+.vbar-col{display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.vbar-val{font-size:10px;font-weight:900;color:var(--muted);font-variant-numeric:tabular-nums}
+.vbar-track{width:100%;max-width:30px;height:125px;background:var(--surface-3);border-radius:9px;display:flex;flex-direction:column-reverse;overflow:hidden;padding:2px;gap:1.5px;position:relative}
+.vbar-seg{width:100%;border-radius:5px;transition:height .45s cubic-bezier(.22,1,.36,1);min-height:0}
+.vbar-lbl{font-size:10.5px;font-weight:800;color:var(--text-secondary);white-space:nowrap}
+.vbar-col.is-today .vbar-lbl{color:var(--primary);font-weight:900}
+.vbar-col.is-today .vbar-track{box-shadow:0 0 0 2px rgba(13,155,120,.3)}
+.chart-Legend-inline{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:10.5px;color:var(--muted);font-weight:700;flex-wrap:wrap}
+.chart-Legend-inline span{display:inline-flex;align-items:center;gap:5px}
+.chart-Legend-inline i{width:8px;height:8px;border-radius:50%;display:inline-block}
+
+.trend-wrap{display:flex;flex-direction:column;gap:14px}
+.daily-bars{display:flex;align-items:flex-end;gap:8px;height:96px;padding:14px 6px 6px;background:var(--surface-2);border:1px solid var(--line);border-radius:13px;overflow-x:auto}
+.dbar-item{flex:1;min-width:38px;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end}
+.dbar-fill{width:100%;max-width:26px;border-radius:6px 6px 3px 3px;background:linear-gradient(180deg,#34d399,#0d9b78);transition:height .4s ease}
+.dbar-top{font-size:9.5px;font-weight:900;color:var(--text-secondary);font-variant-numeric:tabular-nums}
+.dbar-date{font-size:9.5px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.top-stu-list{display:grid;gap:8px}
+.top-stu-row{display:grid;gap:4px}
+.top-stu-head{display:flex;justify-content:space-between;font-size:11px;font-weight:800}
+.top-stu-head span:last-child{color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* ===== Dedicated 7-Day & DateTime Analytics Page ===== */
+.an-grid-2{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-bottom:20px}
+.dt-matrix-wrap{overflow-x:auto;padding-bottom:4px}
+.dt-matrix{width:100%;min-width:860px;border-collapse:separate;border-spacing:5px}
+.dt-matrix th{background:var(--surface-2);color:var(--text);font-size:11.5px;font-weight:900;padding:10px 8px;border-radius:10px;text-align:center;border:1px solid var(--line)}
+.dt-matrix th.is-today-col{background:var(--primary-soft);color:var(--primary-dark);border-color:var(--primary)}
+.dt-matrix td.time-col{background:var(--surface-2);color:var(--muted);font-size:11px;font-weight:800;padding:8px 10px;border-radius:10px;white-space:nowrap;text-align:center;border:1px solid var(--line);width:96px;font-variant-numeric:tabular-nums}
+.dt-cell{vertical-align:top;background:var(--surface-2);border:1px dashed var(--line);border-radius:10px;padding:5px;min-width:104px;height:52px;transition:.15s}
+.dt-cell.has-slots{background:var(--surface);border-style:solid;border-color:var(--line-strong)}
+.dt-cell.free-slot:hover{border-color:var(--primary);background:var(--primary-soft)}
+.dt-free-lbl{display:flex;align-items:center;justify-content:center;height:100%;font-size:9.5px;color:var(--muted);opacity:.45;font-weight:700}
+.dt-slot-chip{padding:5px 7px;border-radius:8px;font-size:10px;font-weight:800;margin-bottom:4px;display:flex;flex-direction:column;gap:2px;border-right:3px solid var(--chip-col);background:var(--chip-bg);color:var(--text);cursor:pointer;transition:.15s}
+.dt-slot-chip:last-child{margin-bottom:0}
+.dt-slot-chip:hover{transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+.dt-slot-chip small{font-size:9px;color:var(--muted);font-weight:700;display:flex;justify-content:space-between;gap:4px}
+
+.day-comp-list{display:grid;gap:11px}
+.day-comp-row{padding:11px 14px;border-radius:13px;background:var(--surface-2);border:1px solid var(--line);display:grid;gap:7px}
+.day-comp-row.is-today{border-color:var(--primary);background:var(--primary-soft)}
+.day-comp-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.day-comp-name{font-weight:900;font-size:13px;display:flex;align-items:center;gap:7px}
+.day-comp-stats{display:flex;gap:10px;font-size:11px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+.day-comp-stats b{color:var(--text)}
+.dual-bars{display:grid;gap:5px}
+.dual-bar-line{display:grid;grid-template-columns:78px 1fr 52px;align-items:center;gap:8px;font-size:10px;font-weight:800;color:var(--muted)}
+.dual-track{height:8px;background:var(--surface-3);border-radius:99px;overflow:hidden;display:flex}
+.dual-track span{height:100%;transition:width .4s ease}
+
+.hourly-chart-box{display:flex;flex-direction:column;justify-content:space-between;gap:12px}
+.hourly-svg-wrap{width:100%;overflow-x:auto}
+.hourly-svg-wrap svg{width:100%;min-width:480px;height:210px;display:block}
+.heat-Strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(42px,1fr));gap:5px}
+.heat-pill{padding:7px 4px;border-radius:9px;text-align:center;font-size:10px;font-weight:800;border:1px solid var(--line);font-variant-numeric:tabular-nums}
+.heat-pill small{display:block;font-size:9px;opacity:.8;margin-top:2px}
+
+.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.field{border:1px solid var(--line);background:var(--surface-2);color:var(--text);border-radius:11px;padding:8px 12px;min-height:39px;font-size:12px;font-weight:600;transition:.18s}
+.field:focus{border-color:var(--primary);background:var(--surface)}
+.search-wrap{position:relative;min-width:230px;flex:1}
+.search-wrap svg{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted);pointer-events:none}
+.search-wrap input{width:100%;padding-right:36px}
+
+.students-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:18px}
+.student-card{border:1px solid var(--line);border-radius:16px;padding:16px;transition:.2s;background:var(--surface);display:flex;flex-direction:column;justify-content:space-between;position:relative}
+.student-card:hover{border-color:rgba(13,155,120,.45);transform:translateY(-2px);box-shadow:var(--shadow)}
+.student-card.is-inactive{opacity:.76;background:var(--surface-2);border-style:dashed}
+.status-pill{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;border-radius:99px;padding:3px 9px;border:1px solid transparent;cursor:pointer;transition:.15s;white-space:nowrap}
+.status-pill i{width:6.5px;height:6.5px;border-radius:50%;display:inline-block}
+.status-pill.on{background:rgba(16,185,129,.12);color:#059669;border-color:rgba(16,185,129,.28)}
+.status-pill.on i{background:#10b981;box-shadow:0 0 0 2px rgba(16,185,129,.25)}
+.status-pill.off{background:rgba(225,29,72,.1);color:#e11d48;border-color:rgba(225,29,72,.25)}
+.status-pill.off i{background:#e11d48}
+.status-pill:hover{transform:scale(1.04)}
+.student-top{display:flex;align-items:center;gap:10px}
+.avatar{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:900;font-size:15px;flex:none}
+.student-info{min-width:0;flex:1}
+.student-info strong{font-size:13.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.student-info small{color:var(--muted);font-size:10.5px;font-weight:700}
+.pill{font-size:10px;font-weight:800;border-radius:99px;padding:3px 9px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.student-schedule{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:11px;margin:12px 0;padding:7px 10px;background:var(--surface-2);border-radius:10px;font-weight:600}
+.student-schedule svg{width:14px;height:14px;color:var(--gold);flex:none}
+.student-schedule span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.student-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:9px;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;text-align:center;margin-bottom:10px}
+.student-metrics div small{display:block;font-size:9.5px;color:var(--muted);font-weight:700}
+.student-metrics div strong{display:block;font-size:11.5px;margin-top:2px;font-weight:900;font-variant-numeric:tabular-nums}
+.student-prog-head{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);font-weight:700;margin-bottom:5px}
+.student-quick{display:flex;gap:5px;margin-top:11px}
+.student-quick button{flex:1;border:1px solid var(--line);background:var(--surface-2);color:var(--text-secondary);border-radius:8px;padding:5px 4px;font-size:10.5px;font-weight:800;transition:.15s}
+.student-quick button:hover{background:var(--primary-soft);color:var(--primary);border-color:rgba(13,155,120,.3)}
+.student-actions{display:flex;gap:6px;margin-top:8px}
+.student-actions .btn{flex:1;padding:8px 10px;font-size:11.5px}
+
+.empty{padding:48px 20px;text-align:center;color:var(--muted)}
+.empty svg{width:34px;height:34px;opacity:.45;margin:0 auto 6px;display:block}
+.empty strong{display:block;color:var(--text);margin:6px 0 3px;font-size:13px}
+
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:720px}
+th{font-size:10.5px;color:var(--muted);font-weight:800;background:var(--surface-2);text-align:right;padding:13px 16px;white-space:nowrap;border-bottom:1px solid var(--line)}
+td{padding:13px 16px;border-bottom:1px solid var(--line);font-size:12px;font-variant-numeric:tabular-nums}
+tbody tr{transition:background .15s}
+tbody tr:hover{background:var(--surface-2)}
+.academy-tag{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:99px;background:var(--surface-2)}
+.academy-tag i{width:7px;height:7px;border-radius:50%;display:inline-block}
+.table-action{border:1px solid transparent;border-radius:8px;background:transparent;color:#e11d48;padding:6px;display:inline-grid;place-items:center;transition:.15s}
+.table-action:hover{background:rgba(225,29,72,.1);border-color:rgba(225,29,72,.2)}
+.table-action svg{width:15px;height:15px}
+
+.days-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.day-card{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:var(--surface);display:flex;flex-direction:column}
+.day-card.today-card{border-color:var(--primary);box-shadow:0 0 0 2px rgba(13,155,120,.14)}
+.day-head{padding:13px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-weight:900;font-size:13px}
+.day-card.today-card .day-head{background:var(--primary-soft);color:var(--primary-dark)}
+.slot{padding:11px 15px;border-top:1px solid var(--line);display:flex;align-items:center;gap:10px;transition:background .15s}
+.slot:first-of-type{border-top:0}
+.slot:hover{background:var(--surface-2)}
+.slot-time{font-size:10.5px;font-weight:700;color:var(--muted);width:105px;flex:none}
+.slot-main{flex:1;min-width:0}
+.slot-main strong{font-size:12px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.slot-main small{font-size:10px;font-weight:700;color:var(--muted)}
+.slot .btn{font-size:10.5px;padding:6px 10px}
+
+.page{display:none;animation:fadeIn .22s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.hidden{display:none!important}
+
+.modal-backdrop{position:fixed;inset:0;background:rgba(7,17,31,.72);z-index:60;display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(5px)}
+.modal-backdrop.open{display:flex}
+.modal{width:min(540px,100%);max-height:90vh;overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:0 25px 80px rgba(0,0,0,.35)}
+.modal-head{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.modal-head h3{margin:0;font-size:16px;font-weight:900}
+.modal-content{padding:20px 22px;display:grid;gap:14px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-group{display:grid;gap:6px}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:11px;font-weight:800;color:var(--muted)}
+.form-group input,.form-group select,.form-group textarea{width:100%;border:1px solid var(--line);background:var(--surface-2);color:var(--text);border-radius:11px;padding:10px 12px;font-size:12.5px;font-weight:600}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary);background:var(--surface)}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;padding:0 22px 20px}
+.modal{width:min(620px,100%)}
+.pk-wrap{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--surface);display:grid;gap:12px}
+.pk-step{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:800;color:var(--text-secondary)}
+.pk-step b{width:20px;height:20px;border-radius:50%;background:var(--primary-soft);color:var(--primary);display:inline-grid;place-items:center;font-size:10.5px}
+.day-picker{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.day-chip{border:1px solid var(--line);background:var(--surface-2);border-radius:11px;padding:9px 2px;font-size:11.5px;font-weight:800;color:var(--text-secondary);transition:.15s;display:flex;flex-direction:column;align-items:center;gap:3px}
+.day-chip:hover{border-color:var(--primary);color:var(--primary)}
+.day-chip i.ck{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line-strong);display:block}
+.day-chip.on{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 6px 14px rgba(13,155,120,.25)}
+.day-chip.on i.ck{border-color:#fff;background:#fff;box-shadow:inset 0 0 0 3px var(--primary)}
+.slot-rows{display:grid;gap:8px}
+.slot-row{display:grid;grid-template-columns:72px minmax(0,1fr) 105px auto;gap:8px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2);animation:fadeIn .18s ease}
+.slot-row.missing{border-color:rgba(217,119,6,.55);background:rgba(217,119,6,.06)}
+.slot-row .d-name{font-weight:900;font-size:12.5px}
+.slot-row .d-end{display:block;font-size:10px;color:var(--muted);font-weight:700;margin-top:2px}
+.form-group .slot-row input,.form-group .slot-row select{padding:8px 9px;background:var(--surface)}
+.slot-rm{width:32px;height:32px;border-radius:9px;border:1px solid transparent;background:transparent;color:#e11d48;display:grid;place-items:center;padding:0}
+.slot-rm:hover{background:rgba(225,29,72,.1);border-color:rgba(225,29,72,.2)}
+.slot-rm svg{width:15px;height:15px}
+.pk-empty{padding:14px;text-align:center;font-size:11.5px;color:var(--muted);border:1px dashed var(--line-strong);border-radius:12px}
+.pk-tools{display:flex;gap:6px;flex-wrap:wrap}
+.pk-tools button{border:1px solid var(--line);background:var(--surface-2);color:var(--text-secondary);border-radius:9px;padding:6px 10px;font-size:10.5px;font-weight:800;display:inline-flex;align-items:center;gap:5px}
+.pk-tools button:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-soft)}
+.pk-tools svg{width:13px;height:13px}
+.pk-preview{background:var(--primary-soft);border:1px solid rgba(13,155,120,.22);border-radius:12px;padding:10px 12px;font-size:11.5px;font-weight:700;color:var(--text);line-height:1.8}
+.pk-preview small{display:block;color:var(--muted);font-weight:700;font-size:10.5px}
+.pk-preview .pk-sum{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:6px;padding-top:6px;border-top:1px dashed rgba(13,155,120,.3);flex-wrap:wrap}
+.pk-preview .pk-sum button{border:0;background:var(--primary);color:#fff;border-radius:8px;padding:5px 10px;font-size:10.5px;font-weight:800}
+@media(max-width:580px){.day-picker{grid-template-columns:repeat(4,1fr)}.slot-row{grid-template-columns:1fr 1fr;}.slot-row .d-name{grid-column:1/-1}}
+
+.toast-wrap{position:fixed;bottom:22px;left:22px;z-index:100;display:grid;gap:8px}
+.toast{background:#0f172a;color:#fff;border:1px solid rgba(255,255,255,.12);padding:12px 16px;border-radius:13px;box-shadow:0 12px 30px rgba(0,0,0,.28);font-size:12px;font-weight:700;display:flex;align-items:center;gap:8px;animation:toastIn .22s ease}
+.toast.ok:before{content:'✓';background:#10b981;color:#042f2e;width:18px;height:18px;border-radius:50%;display:inline-grid;place-items:center;font-size:11px;font-weight:900}
+@keyframes toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.footer{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:24px 2px 8px;margin-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;flex-wrap:wrap}
+.footer-actions{display:flex;gap:8px;flex-wrap:wrap}
+.footer-actions button,.footer-actions label{font-size:11px;padding:7px 11px}
+
+@media(max-width:1180px){
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .students-grid{grid-template-columns:repeat(2,1fr)}
+  .section-grid{grid-template-columns:1fr}
+  .charts-grid{grid-template-columns:1fr}
+  .an-grid-2{grid-template-columns:1fr}
+}
+@media(max-width:900px){
+  .sidebar{transform:translateX(105%)}
+  .sidebar.open{transform:translateX(0)}
+  body.sidebar-closed .sidebar.open{transform:translateX(0)}
+  .main{margin-right:0!important}
+  .topbar{height:66px;padding:0 16px}
+  .content{padding:20px 16px 28px}
+  .topbar .page-kicker{display:none}
+  .welcome h2{font-size:19px}
+  .date-chip{display:none}
+}
+@media(max-width:580px){
+  .kpis{gap:10px}
+  .kpi{padding:14px}
+  .kpi-value{font-size:21px}
+  .academies{grid-template-columns:1fr}
+  .students-grid{grid-template-columns:1fr;padding:12px}
+  .days-grid{grid-template-columns:1fr}
+  .panel-head{align-items:stretch;flex-direction:column}
+  .toolbar{width:100%}
+  .search-wrap{min-width:100%}
+  .form-grid{grid-template-columns:1fr}
+  .form-group.full{grid-column:auto}
+  .top-actions{gap:5px}
+  .month-select{min-width:112px;padding:7px 8px;font-size:11px}
+  .top-actions .btn span{display:none}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <div class="brand-info">
+      <div class="brand-mark">ع</div>
+      <div><h1>Dr Araby</h1><p>ACADEMY MANAGEMENT</p></div>
+    </div>
+    <button class="sidebar-close-btn" id="sidebarCloseBtn" title="إغلاق القائمة الجانبية" aria-label="إغلاق القائمة الجانبية">
+      <i data-lucide="panel-right-close"></i>
+    </button>
+  </div>
+  <div class="nav-caption">القائمة الرئيسية</div>
+  <nav class="nav-list">
+    <button class="nav-item active" data-page="overview"><i data-lucide="layout-dashboard"></i><span>نظرة عامة</span></button>
+    <button class="nav-item" data-page="analytics"><i data-lucide="bar-chart-big"></i><span>تحليل الأيام والأوقات</span><span class="nav-badge" id="navAnalyticsBadge">7 أيام</span></button>
+    <button class="nav-item" data-page="students"><i data-lucide="users"></i><span>إدارة الطلبة</span><span class="nav-badge" id="navStudentsBadge">27</span></button>
+    <button class="nav-item" data-page="schedule"><i data-lucide="calendar-days"></i><span>الجدول الأسبوعي</span><span class="nav-badge" id="navScheduleBadge">42</span></button>
+    <button class="nav-item" data-page="sessions"><i data-lucide="clipboard-list"></i><span>سجل الحصص</span><span class="nav-badge" id="navSessionsBadge">58</span></button>
+  </nav>
+  <div class="nav-caption">تصفية حسب الأكاديمية</div>
+  <nav class="nav-list" id="sidebarAcademiesNav">
+    <button class="nav-item" data-academy="qurra"><span class="nav-dot" style="background:#31c69d"></span><span>أكاديمية القراء</span><span class="nav-badge" id="navQurraCount">14</span></button>
+    <button class="nav-item" data-academy="furqan"><span class="nav-dot" style="background:#6199f0"></span><span>أكاديمية الفرقان</span><span class="nav-badge" id="navFurqanCount">3</span></button>
+    <button class="nav-item" data-academy="sabeel"><span class="nav-dot" style="background:#ec7891"></span><span>أكاديمية سبيل</span><span class="nav-badge" id="navSabeelCount">10</span></button>
+  </nav>
+  <button class="nav-item" id="addAcademySidebar" style="color:#34d399;border:1px dashed rgba(52,211,153,.3);margin-top:6px"><i data-lucide="plus-circle"></i><span>إضافة أكاديمية جديدة</span></button>
+  <div class="sidebar-bottom">
+    <div class="academy-mini">
+      <div class="academy-mini-head">
+        <strong>إنجاز الشهر الحالي</strong>
+        <span class="mini-pct" id="sidebarMiniPct">35%</span>
+      </div>
+      <p id="sidebarMiniHours">37.5 من 107 ساعة مستهدفة</p>
+      <div class="mini-dots" id="sidebarMiniDots">
+        <span style="background:#31c69d" title="القراء"></span>
+        <span style="background:#6199f0" title="الفرقان"></span>
+        <span style="background:#ec7891" title="سبيل"></span>
+      </div>
+    </div>
+    <button class="nav-item" id="settingsBtn"><i data-lucide="sliders-horizontal"></i><span>الحدود والأسعار</span></button>
+  </div>
+</aside>
+<main class="main">
+<header class="topbar">
+  <div class="top-left">
+    <button class="sidebar-toggle-btn" id="menuBtn" title="فتح / إغلاق القائمة الجانبية" aria-label="فتح أو إغلاق القائمة الجانبية">
+      <i data-lucide="panel-right-close" id="sidebarToggleIcon"></i>
+    </button>
+    <div>
+      <div class="page-kicker">لوحة الإدارة / <span id="crumb">نظرة عامة</span></div>
+      <div class="page-title" id="topTitle">نظرة عامة</div>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button class="btn btn-soft" id="jsonDbBtn" title="قاعدة بيانات JSON (قراءة وكتابة مباشرة)"><i data-lucide="database"></i><span id="jsonDbStatus">ربط dashboard_data.json</span></button>
+    <select class="month-select" id="monthSelector" aria-label="الشهر"><option value="2026-11">نوفمبر 2026</option><option value="2026-12">ديسمبر 2026</option><option value="2027-01">يناير 2027</option><option value="2027-02">فبراير 2027</option></select>
+    <button class="icon-btn" id="themeBtn" title="تبديل المظهر (ليلي / نهاري)"><i data-lucide="moon"></i></button>
+    <button class="btn btn-soft" id="addAcademyTop"><i data-lucide="building-2"></i><span>إضافة أكاديمية</span></button>
+    <button class="btn btn-primary" id="addStudentTop"><i data-lucide="user-plus"></i><span>إضافة طالب</span></button>
+  </div>
+</header>
+<div class="content">
+  <section class="page active" id="page-overview">
+    <div class="welcome"><div><h2>أهلاً بك يا دكتور عربي 👋</h2><p>ملخص شامل لأداء الأكاديميات، الساعات المنجزة، والأرباح المحققة من قاعدة بيانات JSON.</p></div><div class="date-chip"><i data-lucide="calendar"></i><span id="todayLabel"></span></div></div>
+    <div class="kpis">
+      <article class="kpi"><div class="kpi-head"><span class="kpi-label">الساعات المحققة</span><span class="kpi-icon" style="background:rgba(13,155,120,.12);color:#0d9b78"><i data-lucide="clock-3"></i></span></div><div class="kpi-value"><span id="kpiHours">37.5</span><small style="font-size:12px;color:var(--muted)"> / <span id="kpiLimit">107</span> ساعة</small></div><div class="progress"><span id="hoursProgress" style="width:35%;background:linear-gradient(90deg,#10b981,#0d9b78)"></span></div><div class="kpi-foot"><span id="hoursPercent">35% من المستهدف</span><strong id="hoursRemaining">متبقي 69.5 ساعة</strong></div></article>
+      <article class="kpi"><div class="kpi-head"><span class="kpi-label">الأرباح المحققة</span><span class="kpi-icon" style="background:rgba(217,119,6,.12);color:#d97706"><i data-lucide="wallet"></i></span></div><div class="kpi-value" id="kpiEarned">٢٬٢٥٠ <small style="font-size:12px;color:var(--muted)">ج.م</small></div><div class="kpi-foot"><span>المستهدف عند إتمام الليمت</span><strong id="kpiTarget">٦٬٤٢٠ ج.م</strong></div></article>
+      <article class="kpi"><div class="kpi-head"><span class="kpi-label">المتبقي من المستهدف</span><span class="kpi-icon" style="background:rgba(37,99,235,.12);color:#2563eb"><i data-lucide="target"></i></span></div><div class="kpi-value" id="kpiRemainingMoney">٤٬١٧٠ <small style="font-size:12px;color:var(--muted)">ج.م</small></div><div class="kpi-foot"><span>متوسط سعر الساعة</span><strong id="kpiRate">60 ج.م / ساعة</strong></div></article>
+      <article class="kpi"><div class="kpi-head"><span class="kpi-label">الطلبة والحصص</span><span class="kpi-icon" style="background:rgba(225,29,72,.12);color:#e11d48"><i data-lucide="users"></i></span></div><div class="kpi-value"><span id="kpiStudents">27</span><small style="font-size:12px;color:var(--muted)"> طالب</small></div><div class="kpi-foot"><span>الحصص المسجلة هذا الشهر</span><strong id="kpiSessions">58 حصة</strong></div></article>
+    </div>
+    <div class="section-grid">
+      <section class="panel"><div class="panel-head"><div><h3 class="panel-title"><i data-lucide="building-2" style="width:17px;color:var(--primary)"></i>أداء الأكاديميات</h3><p class="panel-sub">اضغط على أي أكاديمية لاستعراض طلبتها أو أضف أكاديمية جديدة</p></div><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn btn-primary" id="addAcademyOverview"><i data-lucide="plus"></i>إضافة أكاديمية</button><button class="btn btn-soft" id="editLimits"><i data-lucide="settings-2"></i>الحدود والأسعار</button></div></div><div class="panel-body"><div class="academies" id="academyCards"></div></div></section>
+      <section class="panel"><div class="panel-head"><div><h3 class="panel-title"><i data-lucide="history" style="width:17px;color:var(--primary)"></i>آخر الحصص المسجلة</h3><p class="panel-sub">أحدث 5 حصص تم تسجيلها خلال الشهر</p></div><button class="btn btn-soft" data-goto="sessions">عرض السجل الكامل</button></div><div class="panel-body"><div class="activity-list" id="recentActivity"></div></div></section>
+    </div>
+    <div class="charts-grid" id="chartsSection">
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h3 class="panel-title"><i data-lucide="pie-chart" style="width:17px;color:var(--primary)"></i>توزيع الساعات والأرباح</h3>
+            <p class="panel-sub">نسبة إنجاز كل أكاديمية من المستهدف الشهري</p>
+          </div>
+          <span class="pill" style="background:var(--primary-soft);color:var(--primary)" id="donutBadge">35% مكتمل</span>
+        </div>
+        <div class="panel-body chart-box" id="chartDonutContainer"></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h3 class="panel-title"><i data-lucide="bar-chart-3" style="width:17px;color:#2563eb"></i>ضغط الجدول الأسبوعي</h3>
+            <p class="panel-sub">توزيع الساعات المجدولة على أيام الأسبوع</p>
+          </div>
+          <span class="pill" style="background:rgba(37,99,235,.12);color:#2563eb" id="peakDayBadge">الأعلى: السبت</span>
+        </div>
+        <div class="panel-body chart-box" id="chartWeeklyContainer"></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h3 class="panel-title"><i data-lucide="trending-up" style="width:17px;color:#d97706"></i>النشاط اليومي وأعلى الطلبة</h3>
+            <p class="panel-sub">الساعات المسجلة يومياً وأكثر الطلبة التزاماً</p>
+          </div>
+          <span class="pill" style="background:rgba(217,119,6,.12);color:#d97706" id="dailyAvgBadge">متوسط الأداء</span>
+        </div>
+        <div class="panel-body chart-box" id="chartTrendContainer"></div>
+      </section>
+    </div>
+    <section class="panel"><div class="panel-head"><div><h3 class="panel-title"><i data-lucide="sparkles" style="width:17px;color:var(--primary)"></i>وصول سريع للطلبة</h3><p class="panel-sub">ابحث وسجّل حصة فورية(+30د / +45د / +60د) مباشرة</p></div><div class="toolbar"><div class="search-wrap" style="min-width:240px"><i data-lucide="search"></i><input class="field" id="overviewSearch" placeholder="ابحث باسم الطالب لتسجيل حصة سريعة..."></div><button class="btn btn-primary" data-goto="students"><i data-lucide="users"></i>كل الطلبة</button></div></div><div class="students-grid" id="overviewStudents"></div></section>
+  </section>
+  <section class="page" id="page-analytics">
+    <div class="welcome">
+      <div>
+        <h2>تحليل الأيام والأوقات الشامل 📊</h2>
+        <p>تحليل زمني مفصل لجميع أيام الأسبوع الـ 7، ساعات الذروة، أوقات الفراغ، ومقارنة المجدول بالمنجز الفعلي.</p>
+      </div>
+      <div class="toolbar">
+        <select class="field" id="analyticsAcademyFilter">
+          <option value="all">كل الأكاديميات</option>
+          <option value="qurra">أكاديمية القراء</option>
+          <option value="furqan">أكاديمية الفرقان</option>
+          <option value="sabeel">أكاديمية سبيل</option>
+        </select>
+        <button class="btn btn-soft" data-goto="schedule"><i data-lucide="calendar-days"></i>الجدول الأسبوعي</button>
+      </div>
+    </div>
+
+    <div class="kpis">
+      <article class="kpi">
+        <div class="kpi-head"><span class="kpi-label">اليوم الأعلى ضغطاً</span><span class="kpi-icon" style="background:rgba(13,155,120,.12);color:#0d9b78"><i data-lucide="flame"></i></span></div>
+        <div class="kpi-value" id="anKpiPeakDay">السبت</div>
+        <div class="kpi-foot"><span id="anKpiPeakDaySub">9 حصص مجدولة</span><strong id="anKpiLightDay">الأخف: الجمعة</strong></div>
+      </article>
+      <article class="kpi">
+        <div class="kpi-head"><span class="kpi-label">ساعة الذروة اليومية</span><span class="kpi-icon" style="background:rgba(37,99,235,.12);color:#2563eb"><i data-lucide="clock-8"></i></span></div>
+        <div class="kpi-value" id="anKpiPeakHour">6:00 م</div>
+        <div class="kpi-foot"><span id="anKpiPeakHourSub">أعلى تركز للحصص</span><strong id="anKpiWindow">الفترة المسائية</strong></div>
+      </article>
+      <article class="kpi">
+        <div class="kpi-head"><span class="kpi-label">إجمالي الحمل الأسبوعي</span><span class="kpi-icon" style="background:rgba(217,119,6,.12);color:#d97706"><i data-lucide="calendar-range"></i></span></div>
+        <div class="kpi-value"><span id="anKpiWeeklyHrs">25.25</span> <small style="font-size:12px;color:var(--muted)">ساعة/أسبوع</small></div>
+        <div class="kpi-foot"><span id="anKpiAvgDay">المتوسط اليومي: 3.6 س</span><strong id="anKpiWeeklyCount">42 حصة/أسبوع</strong></div>
+      </article>
+      <article class="kpi">
+        <div class="kpi-head"><span class="kpi-label">الإنجاز الفعلي مقابل الأسبوعي</span><span class="kpi-icon" style="background:rgba(225,29,72,.12);color:#e11d48"><i data-lucide="check-circle-2"></i></span></div>
+        <div class="kpi-value" id="anKpiFulfillPct">37%</div>
+        <div class="kpi-foot"><span id="anKpiLoggedSub">37.5 ساعة مسجلة</span><strong id="anKpiExpectedSub">من 101 س متوقعة</strong></div>
+      </article>
+    </div>
+
+    <div class="an-grid-2">
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h3 class="panel-title"><i data-lucide="bar-chart-horizontal" style="width:17px;color:var(--primary)"></i>تحليل ومقارنة جميع أيام الأسبوع (7 أيام)</h3>
+            <p class="panel-sub">مقارنة الساعات الأسبوعية المجدولة (×4 أسابيع) مع الساعات المسجلة فعلياً في كل يوم</p>
+          </div>
+          <span class="pill" style="background:var(--primary-soft);color:var(--primary)" id="anDaysSummaryPill">7 أيام عمل</span>
+        </div>
+        <div class="panel-body">
+          <div class="day-comp-list" id="anDaysComparison"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h3 class="panel-title"><i data-lucide="activity" style="width:17px;color:#2563eb"></i>منحنى التوزيع الزمني للساعات خلال اليوم (DateTime Curve)</h3>
+            <p class="panel-sub">توزيع كثافة الحصص والساعات من 12:00 ظهراً حتى 10:00 مساءً عبر الأسبوع</p>
+          </div>
+        </div>
+        <div class="panel-body hourly-chart-box" id="anHourlyCurve"></div>
+      </section>
+    </div>
+
+    <section class="panel" style="margin-bottom:20px">
+      <div class="panel-head">
+        <div>
+          <h3 class="panel-title"><i data-lucide="grid" style="width:17px;color:var(--primary)"></i>خريطة المواعيد والأوقات الأسبوعية (7 أيام × الساعات اليومية)</h3>
+          <p class="panel-sub">تعرض جميع الحصص في موقعها الزمني الفعلي + الأوقات المتاحة لإضافة طلبة جدد (اضغط على أي حصة للتسجيل الفوري)</p>
+        </div>
+        <div class="chart-Legend-inline" id="anMatrixLegend">
+          <span><i style="background:#21a982"></i>القراء</span>
+          <span><i style="background:#3979d6"></i>الفرقان</span>
+          <span><i style="background:#d65c78"></i>سبيل</span>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="dt-matrix-wrap" id="anMatrixContainer"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h3 class="panel-title"><i data-lucide="table-2" style="width:17px;color:#d97706"></i>التقرير التحليلي التفصيلي لأيام الأسبوع الـ 7</h3>
+          <p class="panel-sub">ملخص عدد الحصص، الساعات، توزيع الأكاديميات، الأرباح الفعلية، وأوقات الفراغ المتاحة لكل يوم</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>اليوم</th>
+              <th>الحصص الأسبوعية</th>
+              <th>الساعات الأسبوعية</th>
+              <th>توزيع الأكاديميات</th>
+              <th>المسجل فعلياً (الشهر)</th>
+              <th>الأرباح المحققة</th>
+              <th>أبرز الأوقات المتاحة</th>
+            </tr>
+          </thead>
+          <tbody id="anDaysTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+  <section class="page" id="page-students">
+    <div class="welcome"><div><h2>إدارة الطلبة</h2><p>تتبّع تقدم كل طالب، الساعات المتبقية، وسجّل الحصص بضغطة واحدة.</p></div><button class="btn btn-primary" id="addStudentPage"><i data-lucide="user-plus"></i>إضافة طالب جديد</button></div>
+    <section class="panel"><div class="panel-head"><div><h3 class="panel-title">قائمة الطلبة المسجلين</h3><p class="panel-sub" id="studentCountLabel">27 طالب</p></div><div class="toolbar"><div class="search-wrap"><i data-lucide="search"></i><input class="field" id="studentSearch" placeholder="ابحث باسم الطالب أو الموعد..."></div><select class="field" id="statusFilter"><option value="all">كل الحالات (نشط ومتوقف)</option><option value="active">الطلبة النشطون فقط</option><option value="inactive">غير النشطين / المتوقفين</option></select><select class="field" id="academyFilter"><option value="all">كل الأكاديميات</option><option value="qurra">أكاديمية القراء</option><option value="furqan">أكاديمية الفرقان</option><option value="sabeel">أكاديمية سبيل</option></select><select class="field" id="dayFilter"><option value="all">كل الأيام</option><option value="السبت">السبت</option><option value="الأحد">الأحد</option><option value="الإثنين">الإثنين</option><option value="الثلاثاء">الثلاثاء</option><option value="الأربعاء">الأربعاء</option><option value="الخميس">الخميس</option><option value="الجمعة">الجمعة</option></select></div></div><div class="students-grid" id="studentsGrid"></div><div class="empty hidden" id="studentsEmpty"><i data-lucide="user-round-x"></i><strong>لا توجد نتائج مطابقة</strong><span>جرّب تغيير اسم الطالب أو فلتر الحالة / الأكاديمية / اليوم.</span></div></section>
+  </section>
+  <section class="page" id="page-schedule">
+    <div class="welcome"><div><h2>الجدول الأسبوعي</h2><p>مواعيد الحصص موزعة من السبت إلى الجمعة مع إمكانية التسجيل الفوري.</p></div><span class="date-chip"><i data-lucide="calendar-check-2"></i><span id="scheduleTotalBadge">من السبت إلى الجمعة</span></span></div>
+    <section class="panel"><div class="panel-head"><div><h3 class="panel-title">جدول الحصص الأسبوعي</h3><p class="panel-sub">اضغط "تسجيل فوري" لإضافة الحصة مباشرة أو "مخصص" لتحديد تاريخ وملاحظات.</p></div><div class="toolbar"><select class="field" id="scheduleAcademyFilter"><option value="all">كل الأكاديميات</option><option value="qurra">أكاديمية القراء</option><option value="furqan">أكاديمية الفرقان</option><option value="sabeel">أكاديمية سبيل</option></select></div></div><div class="panel-body"><div class="days-grid" id="daysGrid"></div></div></section>
+  </section>
+  <section class="page" id="page-sessions">
+    <div class="welcome"><div><h2>سجل الحصص</h2><p>سجل تفصيلي لجميع الحصص المنجزة وقيمتها المالية خلال الشهر المحدد.</p></div><button class="btn btn-primary" id="manualSession"><i data-lucide="plus"></i>إضافة حصة يدوياً</button></div>
+    <section class="panel"><div class="panel-head"><div><h3 class="panel-title">الحصص المنجزة</h3><p class="panel-sub" id="sessionCountLabel">58 حصة</p></div><div class="toolbar"><div class="search-wrap" style="min-width:200px"><i data-lucide="search"></i><input class="field" id="sessionSearch" placeholder="ابحث باسم الطالب أو التاريخ..."></div><select class="field" id="logAcademyFilter"><option value="all">كل الأكاديميات</option><option value="qurra">أكاديمية القراء</option><option value="furqan">أكاديمية الفرقان</option><option value="sabeel">أكاديمية سبيل</option></select><button class="btn btn-soft" id="exportCsv"><i data-lucide="file-spreadsheet"></i>تصدير CSV</button></div></div><div class="table-wrap"><table><thead><tr><th>التاريخ</th><th>اسم الطالب</th><th>الأكاديمية</th><th>المدة</th><th>القيمة</th><th>ملاحظات</th><th>إجراء</th></tr></thead><tbody id="sessionsBody"></tbody></table></div><div class="empty hidden" id="sessionsEmpty"><i data-lucide="clipboard-list"></i><strong>لا توجد حصص مسجلة لهذا الشهر</strong><span>يمكنك تسجيل حصة من بطاقة الطالب أو إضافتها يدوياً.</span></div></section>
+  </section>
+  <footer class="footer"><span id="footerStatus">© Dr Araby Dashboard · قاعدة البيانات: dashboard_data.json (قراءة وكتابة لجميع الصفحات)</span><div class="footer-actions"><button class="btn btn-primary" id="cloudflareBtn" title="تحميل ملف index.html محدث بجميع البيانات لرفعه على Cloudflare Pages"><i data-lucide="cloud-upload"></i>تحميل index.html لـ Cloudflare</button><button class="btn" id="reloadJsonBtn"><i data-lucide="refresh-cw"></i>قراءة من JSON</button><button class="btn" id="backupBtn"><i data-lucide="download"></i>حفظ dashboard_data.json</button><label class="btn" for="restoreFile"><i data-lucide="upload"></i>استيراد ملف JSON</label><input type="file" id="restoreFile" accept=".json,application/json" hidden><button class="btn btn-danger" id="resetMonth"><i data-lucide="rotate-ccw"></i>تصفير الشهر</button></div></footer>
+</div>
+</main>
+</div>
+<div class="modal-backdrop" id="modalBackdrop"><div class="modal"><div class="modal-head"><h3 id="modalTitle">إضافة طالب</h3><button class="icon-btn" id="closeModal"><i data-lucide="x"></i></button></div><form id="modalForm"><div class="modal-content" id="modalContent"></div><div class="modal-actions"><button type="button" class="btn" id="cancelModal">إلغاء</button><button type="submit" class="btn btn-primary" id="modalSubmit">حفظ</button></div></form></div></div>
+<div class="toast-wrap" id="toastWrap"></div>
+<script>
+const STORAGE_KEY='dr_araby_dashboard_v4_all';
+const MONTH_NAMES={'2026-11':'نوفمبر 2026','2026-12':'ديسمبر 2026','2027-01':'يناير 2027','2027-02':'فبراير 2027'};
+const DEFAULT_ACADEMIES={qurra:{name:'أكاديمية القراء',short:'القراء',color:'#21a982',soft:'#e8f7f2'},furqan:{name:'أكاديمية الفرقان',short:'الفرقان',color:'#3979d6',soft:'#eaf1ff'},sabeel:{name:'أكاديمية سبيل',short:'سبيل',color:'#d65c78',soft:'#fff0f3'}};
+let ACADEMIES=JSON.parse(JSON.stringify(DEFAULT_ACADEMIES));
+const ACADEMY_COLOR_PRESETS=[
+  {color:'#21a982',soft:'#e8f7f2',label:'زمردي'},
+  {color:'#3979d6',soft:'#eaf1ff',label:'أزرق'},
+  {color:'#d65c78',soft:'#fff0f3',label:'وردي'},
+  {color:'#8b5cf6',soft:'#f3e8ff',label:'بنفسجي'},
+  {color:'#d97706',soft:'#fef3c7',label:'ذهبي'},
+  {color:'#0891b2',soft:'#ecfeff',label:'سماوي'},
+  {color:'#ea580c',soft:'#ffedd5',label:'برتقالي'},
+  {color:'#4f46e5',soft:'#e0e7ff',label:'نيلي'}
+];
+const DAYS_ORDER=['السبت','الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة'];
+const INITIAL_LIMITS = {"2026-11":{"qurra":{"targetHours":44,"defaultRate":60},"furqan":{"targetHours":16,"defaultRate":60},"sabeel":{"targetHours":47,"defaultRate":60}}};
+const INITIAL_STUDENTS = [{"id":"st_1794754730626","name":"ياسين محمد","academy":"qurra","rate":60,"schedule":"ملغي","target_hours":1,"targetHours":1,"default_duration":1,"defaultDuration":1,"slots":[]},{"id":"st_1794673739698","name":"أحمد السيد","academy":"sabeel","rate":60,"schedule":"الأحد 9:00-8:00، الأربعاء 10:00-9:00","target_hours":8,"targetHours":8,"default_duration":1,"defaultDuration":1,"slots":[{"day":"الأحد","time":"8:00 - 9:00","sortOrder":800,"durationText":"60 دقيقة","duration":1},{"day":"الأربعاء","time":"9:00 - 10:00","sortOrder":900,"durationText":"60 دقيقة","duration":1}]},{"id":"qurra_1","name":"عبد الرحمن","academy":"qurra","rate":60,"schedule":"السبت 5:30 - 6:00، الإثنين 5:30 - 6:00","target_hours":4,"targetHours":4,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"السبت","time":"5:30 - 6:00","sortOrder":530,"durationText":"30 دقيقة","duration":0.5},{"day":"الإثنين","time":"5:30 - 6:00","sortOrder":530,"durationText":"30 دقيقة","duration":0.5}]},{"id":"qurra_2","name":"آسر","academy":"qurra","rate":60,"schedule":"السبت 6:00 - 6:30، الإثنين 6:00 - 6:30","target_hours":4,"targetHours":4,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"السبت","time":"6:00 - 6:30","sortOrder":600,"durationText":"30 دقيقة","duration":0.5},{"day":"الإثنين","time":"6:00 - 6:30","sortOrder":600,"durationText":"30 دقيقة","duration":0.5}]},{"id":"qurra_3","name":"أنس أحمد","academy":"qurra","rate":60,"schedule":"السبت 8:30 - 9:30 (60 دقيقة)","target_hours":4,"targetHours":4,"default_duration":1,"defaultDuration":1,"slots":[{"day":"السبت","time":"8:30 - 9:30","sortOrder":830,"durationText":"60 دقيقة","duration":1}]},{"id":"qurra_4","name":"ساجد","academy":"qurra","rate":60,"schedule":"الأحد 12:30 - 1:00، الأربعاء 6:30 - 7:00","target_hours":4,"targetHours":4,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"الأحد","time":"12:30 - 1:00","sortOrder":130,"durationText":"30 دقيقة","duration":0.5},{"day":"الأربعاء","time":"6:30 - 7:00","sortOrder":630,"durationText":"30 دقيقة","duration":0.5}]},{"id":"qurra_5","name":"آزاد","academy":"qurra","rate":60,"schedule":"الأحد 1:00 - 1:30، الأربعاء 7:00 - 7:30","target_hours":4,"targetHours":4,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"الأحد","time":"1:00 - 1:30","sortOrder":200,"durationText":"30 دقيقة","duration":0.5},{"day":"الأربعاء","time":"7:00 - 7:30","sortOrder":700,"durationText":"30 دقيقة","duration":0.5}]},{"id":"qurra_6","name":"ياسين سامي","academy":"qurra","rate":60,"schedule":"الأحد 5:30 - 6:00","target_hours":2,"targetHours":2,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"الأحد","time":"5:30 - 6:00","sortOrder":530,"durationText":"30 دقيقة","duration":0.5}]},{"id":"qurra_7","name":"يحيى حسن","academy":"qurra","rate":60,"schedule":"الأحد 6:30 - 7:00، الثلاثاء 7:30 - 8:00","target_hours":4,"targetHours":4,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"الأحد","time":"6:30 - 7:00","sortOrder":630,"durationText":"30 دقيقة","duration":0.5},{"day":"الثلاثاء","time":"7:30 - 8:00","sortOrder":730,"durationText":"30 دقيقة","duration":0.5}]},{"id":"qurra_8","name":"حمزة عمرو","academy":"qurra","rate":60,"schedule":"الأحد 7:30 - 8:00، الأربعاء 7:30 - 8:00","target_hours":4,"targetHours":4,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"الأحد","time":"7:30 - 8:00","sortOrder":730,"durationText":"30 دقيقة","duration":0.5},{"day":"الأربعاء","time":"7:30 - 8:00","sortOrder":730,"durationText":"30 دقيقة","duration":0.5}]},{"id":"qurra_9","name":"عبد الرحمن أحمد","academy":"qurra","rate":60,"schedule":"الأحد 9:00 - 9:30، الثلاثاء 9:00 - 9:30","target_hours":4,"targetHours":4,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"الأحد","time":"9:00 - 9:30","sortOrder":900,"durationText":"30 دقيقة","duration":0.5},{"day":"الثلاثاء","time":"9:00 - 9:30","sortOrder":900,"durationText":"30 دقيقة","duration":0.5}]},{"id":"qurra_10","name":"أمير محمود","academy":"qurra","rate":60,"schedule":"الثلاثاء 6:00 - 6:30، الخميس 3:00 - 3:30","target_hours":4,"targetHours":4,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"الثلاثاء","time":"6:00 - 6:30","sortOrder":600,"durationText":"30 دقيقة","duration":0.5},{"day":"الخميس","time":"3:00 - 3:30","sortOrder":300,"durationText":"30 دقيقة","duration":0.5}]},{"id":"qurra_11","name":"محمد ممدوح","academy":"qurra","rate":60,"schedule":"الأربعاء 5:30 - 6:00","target_hours":2,"targetHours":2,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"الأربعاء","time":"5:30 - 6:00","sortOrder":530,"durationText":"30 دقيقة","duration":0.5}]},{"id":"qurra_12","name":"ياسين ممدوح","academy":"qurra","rate":60,"schedule":"الأربعاء 6:00 - 6:30","target_hours":2,"targetHours":2,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"الأربعاء","time":"6:00 - 6:30","sortOrder":600,"durationText":"30 دقيقة","duration":0.5}]},{"id":"qurra_13","name":"يوسف ممدوح","academy":"qurra","rate":60,"schedule":"الخميس 2:00 - 2:30","target_hours":2,"targetHours":2,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"الخميس","time":"2:00 - 2:30","sortOrder":200,"durationText":"30 دقيقة","duration":0.5}]},{"id":"furqan_1","name":"أنس محمود","academy":"furqan","rate":60,"schedule":"السبت 6:30 - 7:00، الثلاثاء 6:30 - 7:00","target_hours":6,"targetHours":6,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"السبت","time":"6:30 - 7:00","sortOrder":630,"durationText":"30 دقيقة","duration":0.5},{"day":"الثلاثاء","time":"6:30 - 7:00","sortOrder":630,"durationText":"30 دقيقة","duration":0.5}]},{"id":"furqan_2","name":"عبد الرحمن صلاح","academy":"furqan","rate":60,"schedule":"الأحد بعد الظهر، الثلاثاء بعد الظهر","target_hours":4,"targetHours":4,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"الأحد","time":"بعد الظهر","sortOrder":100,"durationText":"30 دقيقة","duration":0.5},{"day":"الثلاثاء","time":"بعد الظهر","sortOrder":100,"durationText":"30 دقيقة","duration":0.5}]},{"id":"furqan_3","name":"أحمد وائل","academy":"furqan","rate":60,"schedule":"الأحد 10:00-9:30، الثلاثاء 8:00-8:30، الجمعة 4:30-5:00","target_hours":6,"targetHours":6,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"الأحد","time":"9:30 - 10:00","sortOrder":930,"durationText":"30 دقيقة","duration":0.5},{"day":"الثلاثاء","time":"8:00 - 8:30","sortOrder":800,"durationText":"30 دقيقة","duration":0.5},{"day":"الجمعة","time":"4:30 - 5:00","sortOrder":430,"durationText":"30 دقيقة","duration":0.5}]},{"id":"sabeel_1","name":"سيف، لارا، جوري","academy":"sabeel","rate":60,"schedule":"السبت، الإثنين، الجمعة | بعد الظهر (60 دقيقة)","target_hours":12,"targetHours":12,"default_duration":1,"defaultDuration":1,"slots":[{"day":"السبت","time":"بعد الظهر","sortOrder":100,"durationText":"60 دقيقة","duration":1},{"day":"الإثنين","time":"بعد الظهر","sortOrder":100,"durationText":"60 دقيقة","duration":1},{"day":"الجمعة","time":"بعد الظهر","sortOrder":100,"durationText":"60 دقيقة","duration":1}]},{"id":"sabeel_2","name":"أحمد عيد","academy":"sabeel","rate":60,"schedule":"السبت 2:00 - 2:30","target_hours":2,"targetHours":2,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"السبت","time":"2:00 - 2:30","sortOrder":200,"durationText":"30 دقيقة","duration":0.5}]},{"id":"sabeel_3","name":"عمرو عيد","academy":"sabeel","rate":60,"schedule":"السبت 2:30 - 3:00","target_hours":2,"targetHours":2,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"السبت","time":"2:30 - 3:00","sortOrder":230,"durationText":"30 دقيقة","duration":0.5}]},{"id":"sabeel_4","name":"آدم محمود","academy":"sabeel","rate":60,"schedule":"السبت 4:00 - 5:00 (60 دقيقة)","target_hours":4,"targetHours":4,"default_duration":1,"defaultDuration":1,"slots":[{"day":"السبت","time":"4:00 - 5:00","sortOrder":400,"durationText":"60 دقيقة","duration":1}]},{"id":"sabeel_5","name":"عمر عصام","academy":"sabeel","rate":60,"schedule":"السبت 9:30 - 10:00","target_hours":2,"targetHours":2,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"السبت","time":"9:30 - 10:00","sortOrder":930,"durationText":"30 دقيقة","duration":0.5}]},{"id":"sabeel_6","name":"سيف وروان","academy":"sabeel","rate":60,"schedule":"الإثنين 8:00 - 9:00، الأربعاء 8:00 - 9:00 (60 دقيقة)","target_hours":8,"targetHours":8,"default_duration":1,"defaultDuration":1,"slots":[{"day":"الإثنين","time":"8:00 - 9:00","sortOrder":800,"durationText":"60 دقيقة","duration":1},{"day":"الأربعاء","time":"8:00 - 9:00","sortOrder":800,"durationText":"60 دقيقة","duration":1}]},{"id":"sabeel_7","name":"ياسين محمود","academy":"sabeel","rate":60,"schedule":"الثلاثاء 5:30 - 6:00","target_hours":2,"targetHours":2,"default_duration":0.5,"defaultDuration":0.5,"slots":[{"day":"الثلاثاء","time":"5:30 - 6:00","sortOrder":530,"durationText":"30 دقيقة","duration":0.5}]},{"id":"sabeel_8","name":"أحمد ونور","academy":"sabeel","rate":60,"schedule":"الخميس 4:00 - 4:45 (45 دقيقة)","target_hours":3,"targetHours":3,"default_duration":0.75,"defaultDuration":0.75,"slots":[{"day":"الخميس","time":"4:00 - 4:45","sortOrder":400,"durationText":"45 دقيقة","duration":0.75}]},{"id":"sabeel_9","name":"أحمد عمرو","academy":"sabeel","rate":60,"schedule":"الخميس 5:30 - 6:30 (60 دقيقة)","target_hours":4,"targetHours":4,"default_duration":1,"defaultDuration":1,"slots":[{"day":"الخميس","time":"5:30 - 6:30","sortOrder":530,"durationText":"60 دقيقة","duration":1}]}];
+const INITIAL_SESSIONS = [{"id":"ses_1794854468960","studentId":"qurra_8","studentName":"حمزة عمرو","academy":"qurra","month":"2026-11","date":"2026-11-16","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794853260266","studentId":"sabeel_1","studentName":"سيف، لارا، جوري","academy":"sabeel","month":"2026-11","date":"2026-11-16","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794847614572","studentId":"qurra_2","studentName":"آسر","academy":"qurra","month":"2026-11","date":"2026-11-16","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794847613143","studentId":"qurra_1","studentName":"عبد الرحمن","academy":"qurra","month":"2026-11","date":"2026-11-16","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794771380755","studentId":"qurra_9","studentName":"عبد الرحمن أحمد","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794771343098","studentId":"st_1794673739698","studentName":"أحمد السيد","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794763106512","studentId":"qurra_7","studentName":"يحيى حسن","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794758672642","studentId":"qurra_6","studentName":"ياسين سامي","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794756629804","studentId":"sabeel_8","studentName":"أحمد ونور","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":0.75,"rate":60,"amount":45,"notes":"حصة مسجلة"},{"id":"ses_1794756628827","studentId":"sabeel_8","studentName":"أحمد ونور","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":0.75,"rate":60,"amount":45,"notes":"حصة مسجلة"},{"id":"ses_1794756596890","studentId":"sabeel_9","studentName":"أحمد عمرو","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794756596315","studentId":"sabeel_9","studentName":"أحمد عمرو","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794756544444","studentId":"sabeel_6","studentName":"سيف وروان","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794756543681","studentId":"sabeel_6","studentName":"سيف وروان","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794756542141","studentId":"sabeel_6","studentName":"سيف وروان","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794756541488","studentId":"sabeel_6","studentName":"سيف وروان","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794756496831","studentId":"sabeel_7","studentName":"ياسين محمود","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794756496097","studentId":"sabeel_7","studentName":"ياسين محمود","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794756375756","studentId":"sabeel_3","studentName":"عمرو عيد","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794756373154","studentId":"sabeel_2","studentName":"أحمد عيد","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794756346694","studentId":"sabeel_1","studentName":"سيف، لارا، جوري","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794756340118","studentId":"sabeel_1","studentName":"سيف، لارا، جوري","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794756332132","studentId":"sabeel_1","studentName":"سيف، لارا، جوري","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794756331043","studentId":"sabeel_1","studentName":"سيف، لارا، جوري","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794756222989","studentId":"sabeel_5","studentName":"عمر عصام","academy":"sabeel","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794755082963","studentId":"furqan_3","studentName":"أحمد وائل","academy":"furqan","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794755082248","studentId":"furqan_3","studentName":"أحمد وائل","academy":"furqan","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794755081283","studentId":"furqan_3","studentName":"أحمد وائل","academy":"furqan","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794755080687","studentId":"furqan_3","studentName":"أحمد وائل","academy":"furqan","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794755080041","studentId":"furqan_3","studentName":"أحمد وائل","academy":"furqan","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794755079544","studentId":"furqan_3","studentName":"أحمد وائل","academy":"furqan","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794755053824","studentId":"furqan_2","studentName":"عبد الرحمن صلاح","academy":"furqan","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794755047677","studentId":"furqan_2","studentName":"عبد الرحمن صلاح","academy":"furqan","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754986613","studentId":"furqan_1","studentName":"أنس محمود","academy":"furqan","month":"2026-11","date":"2026-11-15","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794754985820","studentId":"furqan_1","studentName":"أنس محمود","academy":"furqan","month":"2026-11","date":"2026-11-15","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794754985005","studentId":"furqan_1","studentName":"أنس محمود","academy":"furqan","month":"2026-11","date":"2026-11-15","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794754856891","studentId":"qurra_12","studentName":"ياسين ممدوح","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754853638","studentId":"qurra_11","studentName":"محمد ممدوح","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754843586","studentId":"qurra_10","studentName":"أمير محمود","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754843019","studentId":"qurra_10","studentName":"أمير محمود","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754814696","studentId":"qurra_9","studentName":"عبد الرحمن أحمد","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754805322","studentId":"qurra_8","studentName":"حمزة عمرو","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754787271","studentId":"qurra_8","studentName":"حمزة عمرو","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754781152","studentId":"qurra_7","studentName":"يحيى حسن","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754777375","studentId":"qurra_6","studentName":"ياسين سامي","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754761234","studentId":"st_1794754730626","studentName":"ياسين محمد","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":1,"rate":60,"amount":60,"notes":"حصة مسجلة"},{"id":"ses_1794754696043","studentId":"qurra_5","studentName":"آزاد","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754695370","studentId":"qurra_5","studentName":"آزاد","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754694673","studentId":"qurra_5","studentName":"آزاد","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754693361","studentId":"qurra_4","studentName":"ساجد","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754692907","studentId":"qurra_4","studentName":"ساجد","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754692439","studentId":"qurra_4","studentName":"ساجد","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754671209","studentId":"qurra_2","studentName":"آسر","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794754669874","studentId":"qurra_1","studentName":"عبد الرحمن","academy":"qurra","month":"2026-11","date":"2026-11-15","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794690594069","studentId":"sabeel_5","studentName":"عمر عصام","academy":"sabeel","month":"2026-11","date":"2026-11-14","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794678296334","studentId":"qurra_2","studentName":"آسر","academy":"qurra","month":"2026-11","date":"2026-11-14","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794678265474","studentId":"furqan_1","studentName":"أنس محمود","academy":"furqan","month":"2026-11","date":"2026-11-14","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"},{"id":"ses_1794671735124","studentId":"qurra_1","studentName":"عبد الرحمن","academy":"qurra","month":"2026-11","date":"2026-11-14","duration":0.5,"rate":60,"amount":30,"notes":"حصة مسجلة"}];
+
+let appState={currentMonth:'2026-11',activeTab:'overview',darkMode:false,academies:JSON.parse(JSON.stringify(DEFAULT_ACADEMIES)),limits:JSON.parse(JSON.stringify(INITIAL_LIMITS)),students:JSON.parse(JSON.stringify(INITIAL_STUDENTS)),sessions:JSON.parse(JSON.stringify(INITIAL_SESSIONS))};
+try{
+  const cached=JSON.parse(localStorage.getItem(STORAGE_KEY));
+  if(cached&&Array.isArray(cached.students)&&Array.isArray(cached.sessions)){
+    appState={...appState,...cached};
+    if(appState.academies&&typeof appState.academies==='object'&&Object.keys(appState.academies).length){
+      ACADEMIES=appState.academies;
+    }else{
+      appState.academies=ACADEMIES;
+    }
+  }
+}catch(e){}
+
+let jsonFileHandle=null;
+let serverApiAvailable=false;
+let isInitializing=true;
+
+function idbStoreHandle(handle){
+  try{
+    const req=indexedDB.open('dr_araby_json_db',1);
+    req.onupgradeneeded=e=>e.target.result.createObjectStore('handles');
+    req.onsuccess=e=>{
+      const tx=e.target.result.transaction('handles','readwrite');
+      tx.objectStore('handles').put(handle,'dashboard_data_json');
+    };
+  }catch(_){}
+}
+
+function idbLoadHandle(){
+  return new Promise(resolve=>{
+    try{
+      const req=indexedDB.open('dr_araby_json_db',1);
+      req.onupgradeneeded=e=>e.target.result.createObjectStore('handles');
+      req.onsuccess=e=>{
+        const tx=e.target.result.transaction('handles','readonly');
+        const getReq=tx.objectStore('handles').get('dashboard_data_json');
+        getReq.onsuccess=()=>resolve(getReq.result||null);
+        getReq.onerror=()=>resolve(null);
+      };
+      req.onerror=()=>resolve(null);
+    }catch(_){resolve(null);}
+  });
+}
+
+function updateDbIndicator(mode,detail){
+  const statusEl=el('jsonDbStatus');
+  const btnEl=el('jsonDbBtn');
+  if(!statusEl||!btnEl)return;
+  if(mode==='server'){
+    statusEl.textContent=detail||'متصل بـ dashboard_data.json ✓';
+    btnEl.style.background='#e8f7f2';
+    btnEl.style.color='#08785e';
+    btnEl.style.borderColor='#0d9b7855';
+  }else if(mode==='file'){
+    statusEl.textContent=detail||'مرتبط بـ dashboard_data.json ✓';
+    btnEl.style.background='#e8f7f2';
+    btnEl.style.color='#08785e';
+    btnEl.style.borderColor='#0d9b7855';
+  }else{
+    statusEl.textContent=detail||'ربط dashboard_data.json';
+    btnEl.style.background='';
+    btnEl.style.color='';
+    btnEl.style.borderColor='';
+  }
+}
+
+function isStudentActive(s){
+  if(!s)return false;
+  if(typeof s.active==='boolean')return s.active;
+  if(typeof s.status==='string')return s.status!=='inactive';
+  return !String(s.schedule||'').includes('ملغي');
+}
+
+function buildJsonDatabaseObject(){
+  ensureMonth();
+  const m=appState.currentMonth;
+  const academiesArr=Object.keys(ACADEMIES).map(k=>{
+    const a=ACADEMIES[k];
+    const sum=academySummary(k);
+    const stList=appState.students.filter(s=>s.academy===k);
+    const activeStList=stList.filter(isStudentActive);
+    return {
+      id:k,
+      name:a.name,
+      short:a.short,
+      color:a.color,
+      soft:a.soft,
+      rate:monthRate(k),
+      target_hours:monthLimit(k),
+      logged_hours:sum.hours,
+      students_count:stList.length,
+      active_students_count:activeStList.length,
+      weekly_sessions:sum.weeklySlots
+    };
+  });
+  const studentsArr=appState.students.map(s=>{
+    const act=isStudentActive(s);
+    return {
+      id:s.id,
+      name:s.name,
+      academy:s.academy,
+      active:act,
+      status:act?'active':'inactive',
+      rate:Number(s.rate??60),
+      schedule:s.schedule||'',
+      target_hours:Number(s.targetHours??s.target_hours??0),
+      targetHours:Number(s.targetHours??s.target_hours??0),
+      default_duration:Number(s.defaultDuration??s.default_duration??0.5),
+      defaultDuration:Number(s.defaultDuration??s.default_duration??0.5),
+      slots:Array.isArray(s.slots)?s.slots:[]
+    };
+  });
+  return {
+    dashboard_title:"Dr Araby | لوحة إدارة الأكاديميات",
+    currentMonth:appState.currentMonth,
+    darkMode:!!appState.darkMode,
+    updatedAt:appState.updatedAt||Date.now(),
+    limits:appState.limits,
+    academies:academiesArr,
+    students:studentsArr,
+    sessions:appState.sessions
+  };
+}
+
+function applyJsonDatabaseObject(json){
+  if(!json||typeof json!=='object')return false;
+  if(json.currentMonth)appState.currentMonth=json.currentMonth;
+  if(typeof json.darkMode==='boolean')appState.darkMode=json.darkMode;
+  if(json.limits&&typeof json.limits==='object'){
+    appState.limits=json.limits;
+  }
+  if(Array.isArray(json.academies)&&json.academies.length){
+    const newAc={};
+    json.academies.forEach((ac,idx)=>{
+      if(!ac||!ac.id)return;
+      const preset=ACADEMY_COLOR_PRESETS[idx%ACADEMY_COLOR_PRESETS.length];
+      const def=DEFAULT_ACADEMIES[ac.id]||{};
+      const name=ac.name||def.name||ac.id;
+      const short=ac.short||def.short||name.replace(/^أكاديمية\s+/,'').trim()||name;
+      const color=ac.color||def.color||preset.color;
+      const soft=ac.soft||def.soft||preset.soft;
+      newAc[ac.id]={name,short,color,soft};
+    });
+    if(Object.keys(newAc).length){
+      ACADEMIES=newAc;
+      appState.academies=ACADEMIES;
+    }
+  }
+  ensureMonth();
+  if(Array.isArray(json.academies)){
+    json.academies.forEach(ac=>{
+      if(ac.id){
+        if(!appState.limits[appState.currentMonth][ac.id]){
+          appState.limits[appState.currentMonth][ac.id]={targetHours:0,defaultRate:60};
+        }
+        if(ac.target_hours!==undefined||ac.targetHours!==undefined){
+          appState.limits[appState.currentMonth][ac.id].targetHours=Number(ac.target_hours??ac.targetHours);
+        }
+        if(ac.rate!==undefined){
+          appState.limits[appState.currentMonth][ac.id].defaultRate=Number(ac.rate);
+        }
+      }
+    });
+  }
+  if(Array.isArray(json.students)&&json.students.length){
+    appState.students=json.students.map((st,i)=>{
+      const fallback=INITIAL_STUDENTS.find(x=>x.id===st.id)||{};
+      const merged={...fallback,...st};
+      const act=isStudentActive(merged);
+      return {
+        id:st.id||fallback.id||('stu_'+i),
+        name:st.name||fallback.name||'',
+        academy:st.academy||fallback.academy||'qurra',
+        active:act,
+        status:act?'active':'inactive',
+        rate:Number(st.rate??fallback.rate??60),
+        targetHours:Number(st.targetHours??st.target_hours??fallback.targetHours??0),
+        target_hours:Number(st.target_hours??st.targetHours??fallback.targetHours??0),
+        defaultDuration:Number(st.defaultDuration??st.default_duration??fallback.defaultDuration??0.5),
+        default_duration:Number(st.default_duration??st.defaultDuration??fallback.defaultDuration??0.5),
+        schedule:st.schedule??fallback.schedule??'',
+        slots:Array.isArray(st.slots)?st.slots:(fallback.slots||[])
+      };
+    });
+  }
+  if(Array.isArray(json.sessions)){
+    appState.sessions=json.sessions;
+  }
+  if(json.updatedAt)appState.updatedAt=json.updatedAt;
+  ensureMonth();
+  return true;
+}
+
+function recalcAcademyLimits(){
+  if(!appState.limits[appState.currentMonth]){
+    appState.limits[appState.currentMonth]={qurra:{targetHours:44,defaultRate:60},furqan:{targetHours:16,defaultRate:60},sabeel:{targetHours:47,defaultRate:60}};
+  }
+  const m=appState.currentMonth;
+  for(const k of Object.keys(ACADEMIES)){
+    if(!appState.limits[m][k])appState.limits[m][k]={targetHours:0,defaultRate:60};
+    const activeSt=appState.students.filter(s=>s.academy===k&&isStudentActive(s));
+    if(activeSt.length>0){
+      const sumTarget=activeSt.reduce((acc,s)=>acc+Number(s.targetHours??s.target_hours??0),0);
+      appState.limits[m][k].targetHours=sumTarget;
+    }
+  }
+}
+
+function ensureMonth(){
+  recalcAcademyLimits();
+}
+ensureMonth();
+
+async function writeToJsonDatabase(){
+  const payloadObj=buildJsonDatabaseObject();
+  const jsonText=JSON.stringify(payloadObj,null,4);
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(appState));
+  if(isInitializing)return;
+
+  if(serverApiAvailable){
+    try{
+      const res=await fetch('/api/save',{method:'POST',headers:{'Content-Type':'application/json; charset=utf-8'},body:jsonText});
+      if(res.ok){
+        updateDbIndicator('server','تم الحفظ في dashboard_data.json ✓');
+        return;
+      }
+    }catch(_){
+      serverApiAvailable=false;
+    }
+  }
+
+  if(jsonFileHandle){
+    try{
+      const perm=await jsonFileHandle.queryPermission({mode:'readwrite'});
+      if(perm==='granted'||(await jsonFileHandle.requestPermission({mode:'readwrite'}))==='granted'){
+        const writable=await jsonFileHandle.createWritable();
+        await writable.write(jsonText);
+        await writable.close();
+        updateDbIndicator('file','تم الحفظ في dashboard_data.json ✓');
+        return;
+      }
+    }catch(err){
+      console.warn('File write error:',err);
+    }
+  }
+}
+
+function saveState(){
+  appState.updatedAt=Date.now();
+  recalcAcademyLimits();
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(appState));
+  writeToJsonDatabase();
+}
+function el(id){return document.getElementById(id)}
+function fmt(n){return new Intl.NumberFormat('ar-EG',{maximumFractionDigits:2}).format(Number(n)||0)}
+function money(n){return fmt(Math.round((Number(n)||0)*100)/100)}
+function academyName(k){return ACADEMIES[k]?.name||'—'}
+function academyColor(k){return ACADEMIES[k]?.color||'#8994a6'}
+function resolveSessionAcademy(x){
+  if(x.academy&&ACADEMIES[x.academy])return x.academy;
+  const st=appState.students.find(s=>s.id===x.studentId);
+  return st?.academy||x.academy||'qurra';
+}
+function monthSessions(){return appState.sessions.filter(x=>String(x.month||x.date||'').slice(0,7)===appState.currentMonth)}
+function monthLimit(k){
+  const activeSt=appState.students.filter(s=>s.academy===k&&isStudentActive(s));
+  if(activeSt.length>0){
+    return activeSt.reduce((acc,s)=>acc+Number(s.targetHours??s.target_hours??0),0);
+  }
+  return Number(appState.limits[appState.currentMonth]?.[k]?.targetHours)||0;
+}
+function monthRate(k){return Number(appState.limits[appState.currentMonth]?.[k]?.defaultRate)||60}
+function sessionHours(x){return Number(x.duration)||0}
+function getStudentSlots(s){
+  if(!s||!isStudentActive(s))return [];
+  const defDur=Number(s.defaultDuration??s.default_duration??0.5);
+  if(Array.isArray(s.slots)&&s.slots.length){
+    return s.slots.map(z=>({
+      day:z.day,
+      time:String(z.time||'5:00 - 5:30'),
+      sortOrder:Number(z.sortOrder)||500,
+      duration:Number(z.duration)||defDur,
+      durationText:String(z.durationText||(Math.round((Number(z.duration)||defDur)*60)+' دقيقة'))
+    }));
+  }
+  if(s.schedule&&!String(s.schedule).includes('ملغي')){
+    const matched=[];
+    DAYS_ORDER.forEach(d=>{
+      if(String(s.schedule).includes(d)){
+        matched.push({day:d,time:String(s.schedule),sortOrder:500,duration:defDur,durationText:Math.round(defDur*60)+' دقيقة'});
+      }
+    });
+    if(matched.length)return matched;
+  }
+  const th=Number(s.targetHours??s.target_hours??0);
+  if(th>0){
+    const weeklyHrs=th/4;
+    const count=Math.max(1,Math.min(7,Math.round(weeklyHrs/defDur)));
+    const perSlotDur=weeklyHrs/count;
+    const defaultDays=['السبت','الثلاثاء','الأحد','الأربعاء','الإثنين','الخميس','الجمعة'];
+    const generated=[];
+    for(let i=0;i<count;i++){
+      generated.push({
+        day:defaultDays[i%defaultDays.length],
+        time:'5:00 - 5:30',
+        sortOrder:500,
+        duration:perSlotDur,
+        durationText:Math.round(perSlotDur*60)+' دقيقة'
+      });
+    }
+    return generated;
+  }
+  return [];
+}
+function academySummary(k){
+  const ss=monthSessions().filter(x=>resolveSessionAcademy(x)===k);
+  const hours=ss.reduce((a,x)=>a+sessionHours(x),0);
+  const earned=ss.reduce((a,x)=>a+(Number(x.amount)||sessionHours(x)*(Number(x.rate)||monthRate(k))),0);
+  const allSt=appState.students.filter(x=>x.academy===k);
+  const activeSt=allSt.filter(isStudentActive);
+  const limit=monthLimit(k);
+  const targetMoney=activeSt.length>0
+    ?activeSt.reduce((acc,s)=>acc+Number(s.targetHours??s.target_hours??0)*(Number(s.rate)||monthRate(k)),0)
+    :limit*monthRate(k);
+  let weeklySlots=0,weeklyHours=0;
+  activeSt.forEach(s=>{
+    const sl=getStudentSlots(s);
+    weeklySlots+=sl.length;
+    weeklyHours+=sl.reduce((acc,z)=>acc+Number(z.duration||0.5),0);
+  });
+  return {
+    hours,
+    earned,
+    limit,
+    targetMoney,
+    remaining:Math.max(0,limit-hours),
+    pct:limit?Math.min(100,hours/limit*100):0,
+    count:allSt.length,
+    activeCount:activeSt.length,
+    sessionsCount:ss.length,
+    weeklySlots,
+    weeklyHours
+  };
+}
+function totals(){
+  const sessions=monthSessions();
+  const hours=sessions.reduce((a,x)=>a+sessionHours(x),0);
+  const earned=sessions.reduce((a,x)=>a+(Number(x.amount)||sessionHours(x)*(Number(x.rate)||60)),0);
+  const keys=Object.keys(ACADEMIES);
+  const limit=keys.reduce((a,k)=>a+monthLimit(k),0);
+  const target=keys.reduce((a,k)=>a+academySummary(k).targetMoney,0);
+  const weighted=hours?earned/hours:(limit?target/limit:60);
+  return {sessions,hours,earned,limit,target,remaining:Math.max(0,target-earned),weighted};
+}
+function toast(msg){const n=document.createElement('div');n.className='toast ok';n.textContent=msg;el('toastWrap').append(n);setTimeout(()=>n.remove(),2800)}
+function iconRefresh(){if(window.lucide)lucide.createIcons()}
+function setTheme(){document.documentElement.classList.toggle('dark',!!appState.darkMode);el('themeBtn').innerHTML=`<i data-lucide="${appState.darkMode?'sun':'moon'}"></i>`;iconRefresh()}
+
+function isMobileViewport(){return window.innerWidth<=900}
+function syncSidebarUI(){
+  const sb=el('sidebar'),ov=el('sidebarOverlay'),btn=el('menuBtn');
+  if(isMobileViewport()){
+    const isOpen=sb.classList.contains('open');
+    ov.classList.toggle('show',isOpen);
+    btn.innerHTML=`<i data-lucide="${isOpen?'panel-right-close':'panel-right-open'}"></i>`;
+  }else{
+    ov.classList.remove('show');
+    const isClosed=document.body.classList.contains('sidebar-closed');
+    btn.innerHTML=`<i data-lucide="${isClosed?'panel-right-open':'panel-right-close'}"></i>`;
+    btn.title=isClosed?'فتح القائمة الجانبية':'إغلاق القائمة الجانبية';
+  }
+  iconRefresh();
+}
+function toggleSidebar(){
+  const sb=el('sidebar');
+  if(isMobileViewport()){
+    sb.classList.toggle('open');
+  }else{
+    document.body.classList.toggle('sidebar-closed');
+    appState.sidebarClosed=document.body.classList.contains('sidebar-closed');
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(appState));
+  }
+  syncSidebarUI();
+}
+function closeSidebar(){
+  const sb=el('sidebar');
+  if(isMobileViewport()){
+    sb.classList.remove('open');
+  }else{
+    document.body.classList.add('sidebar-closed');
+    appState.sidebarClosed=true;
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(appState));
+  }
+  syncSidebarUI();
+}
+
+function switchPage(page,academy){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  const target=el('page-'+page);
+  if(target)target.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(x=>x.classList.toggle('active',x.dataset.page===page&&!academy||!!academy&&x.dataset.academy===academy));
+  const names={overview:'نظرة عامة',analytics:'تحليل الأيام والأوقات',students:'إدارة الطلبة',schedule:'الجدول الأسبوعي',sessions:'سجل الحصص'};
+  el('topTitle').textContent=academy?academyName(academy):names[page];
+  el('crumb').textContent=el('topTitle').textContent;
+  if(isMobileViewport()){el('sidebar').classList.remove('open');syncSidebarUI()}
+  if(page==='students'){
+    el('academyFilter').value=academy||'all';
+  }
+  renderAll();
+}
+function syncAcademySelects(){
+  const keys=Object.keys(ACADEMIES);
+  const selects=[
+    {id:'academyFilter',allLabel:'كل الأكاديميات'},
+    {id:'scheduleAcademyFilter',allLabel:'كل الأكاديميات'},
+    {id:'logAcademyFilter',allLabel:'كل الأكاديميات'},
+    {id:'analyticsAcademyFilter',allLabel:'كل الأكاديميات'}
+  ];
+  selects.forEach(({id,allLabel})=>{
+    const sel=el(id);
+    if(!sel)return;
+    const prev=sel.value||'all';
+    sel.innerHTML=`<option value="all">${allLabel}</option>`+keys.map(k=>`<option value="${esc(k)}">${esc(ACADEMIES[k].name)}</option>`).join('');
+    sel.value=keys.includes(prev)?prev:'all';
+  });
+}
+function renderSidebarMeta(){
+  syncAcademySelects();
+  const t=totals();
+  const pct=t.limit?Math.min(100,Math.round(t.hours/t.limit*100)):0;
+  const totalSlots=appState.students.filter(isStudentActive).reduce((acc,s)=>acc+getStudentSlots(s).length,0);
+  if(el('navStudentsBadge'))el('navStudentsBadge').textContent=appState.students.length;
+  if(el('navScheduleBadge'))el('navScheduleBadge').textContent=totalSlots;
+  if(el('navSessionsBadge'))el('navSessionsBadge').textContent=t.sessions.length;
+  const keys=Object.keys(ACADEMIES);
+  const currentAcFilter=el('academyFilter')?.value||'all';
+  const isStudentsPage=el('page-students')?.classList.contains('active');
+  if(el('sidebarAcademiesNav')){
+    el('sidebarAcademiesNav').innerHTML=keys.map(k=>{
+      const a=ACADEMIES[k];
+      const cnt=appState.students.filter(s=>s.academy===k).length;
+      const isAct=isStudentsPage&&currentAcFilter===k;
+      return `<button class="nav-item ${isAct?'active':''}" data-academy="${esc(k)}"><span class="nav-dot" style="background:${a.color}"></span><span>${esc(a.name)}</span><span class="nav-badge">${cnt}</span></button>`;
+    }).join('');
+  }
+  if(el('sidebarMiniDots')){
+    el('sidebarMiniDots').innerHTML=keys.map(k=>`<span style="background:${ACADEMIES[k].color}" title="${esc(ACADEMIES[k].short||ACADEMIES[k].name)}"></span>`).join('');
+  }
+  if(el('sidebarMiniPct'))el('sidebarMiniPct').textContent=pct+'%';
+  if(el('sidebarMiniHours'))el('sidebarMiniHours').textContent=`${fmt(t.hours)} من ${fmt(t.limit)} ساعة مستهدفة`;
+}
+function renderOverview(){
+  const t=totals();
+  const totalWeeklySlots=appState.students.filter(isStudentActive).reduce((acc,s)=>acc+getStudentSlots(s).length,0);
+  el('kpiHours').textContent=fmt(t.hours);
+  el('kpiLimit').textContent=fmt(t.limit);
+  el('hoursProgress').style.width=(t.limit?Math.min(100,t.hours/t.limit*100):0)+'%';
+  el('hoursPercent').textContent=(t.limit?Math.round(t.hours/t.limit*100):0)+'% من المستهدف';
+  el('hoursRemaining').textContent=t.hours>=t.limit&&t.limit>0?'تم تحقيق المستهدف 🎉':'متبقي '+fmt(Math.max(0,t.limit-t.hours))+' ساعة';
+  el('kpiEarned').innerHTML=money(t.earned)+' <small style="font-size:12px;color:var(--muted)">ج.م</small>';
+  el('kpiTarget').textContent=money(t.target)+' ج.م';
+  el('kpiRemainingMoney').innerHTML=money(t.remaining)+' <small style="font-size:12px;color:var(--muted)">ج.م</small>';
+  el('kpiRate').textContent=fmt(t.weighted)+' ج.م / ساعة';
+  el('kpiStudents').textContent=appState.students.length;
+  el('kpiSessions').textContent=`${t.sessions.length} حصة (${totalWeeklySlots}/أسبوع)`;
+  const acKeys=Object.keys(ACADEMIES);
+  el('academyCards').innerHTML=acKeys.map(k=>{
+    const a=ACADEMIES[k],x=academySummary(k);
+    return `<article class="academy-card" data-academy="${esc(k)}" style="--academy:${a.color}">
+      <div class="academy-top">
+        <div class="academy-name"><span class="academy-dot"></span>${esc(a.name)}</div>
+        <div class="academy-actions">
+          <span class="pill" style="background:${a.soft};color:${a.color}">${x.count} طالب</span>
+          <button type="button" class="ac-icon-btn" data-edit-academy="${esc(k)}" title="تعديل الأكاديمية"><i data-lucide="pencil"></i></button>
+          ${acKeys.length>1?`<button type="button" class="ac-icon-btn del" data-delete-academy="${esc(k)}" title="حذف الأكاديمية"><i data-lucide="trash-2"></i></button>`:''}
+        </div>
+      </div>
+      <div class="academy-count">${x.sessionsCount} حصة مسجلة هذا الشهر · ${x.weeklySlots} حصة/أسبوع · ${monthRate(k)} ج/س</div>
+      <div class="academy-numbers">
+        <div><div class="academy-hours">${fmt(x.hours)} <small style="font-size:10px;color:var(--muted)">/ ${fmt(x.limit)} س</small></div><div class="academy-meta">الساعات المحققة من المستهدف</div></div>
+        <div class="academy-money" title="المستهدف: ${money(x.targetMoney)} ج.م">${money(x.earned)} <small style="font-size:9.5px;opacity:.75">/ ${money(x.targetMoney)} ج.م</small></div>
+      </div>
+      <div class="progress"><span style="width:${x.pct}%;background:${a.color}"></span></div>
+      <div class="kpi-foot"><span>${Math.round(x.pct)}% مكتمل</span><strong>${x.remaining>0?fmt(x.remaining)+' س متبقية':'مكتمل ✓'}</strong></div>
+    </article>`;
+  }).join('');
+  const recent=[...t.sessions].sort((a,b)=>(b.createdAt||b.date||'').localeCompare(a.createdAt||a.date||'')).slice(0,5);
+  el('recentActivity').innerHTML=recent.length?recent.map(x=>`<div class="activity"><div class="activity-mark" style="background:${ACADEMIES[resolveSessionAcademy(x)]?.soft||'#eee'};color:${academyColor(resolveSessionAcademy(x))}"><i data-lucide="book-open-check"></i></div><div class="activity-info"><strong>${esc(x.studentName||studentName(x.studentId))}</strong><small>${academyName(resolveSessionAcademy(x))} · ${x.date||''} · ${fmt(sessionHours(x)*60)} د</small></div><div class="activity-value">+${money(x.amount||sessionHours(x)*(x.rate||60))} ج.م</div></div>`).join(''):'<div class="empty">لا توجد حصص مسجلة بعد.</div>';
+  const ovQ=(el('overviewSearch')?.value||'').trim().toLowerCase();
+  const ovList=ovQ?appState.students.filter(s=>s.name.toLowerCase().includes(ovQ)).slice(0,6):appState.students.slice(0,6);
+  renderStudentCards(el('overviewStudents'),ovList);
+  renderCharts(t);
+}
+function renderCharts(t){
+  // 1. Donut Chart: Hours & Earnings Distribution across Academies
+  const donutContainer=el('chartDonutContainer');
+  if(donutContainer){
+    const pct=t.limit?Math.min(100,Math.round(t.hours/t.limit*100)):0;
+    if(el('donutBadge'))el('donutBadge').textContent=`${pct}% من الليمت`;
+    const r=56,c=2*Math.PI*r;
+    const keys=Object.keys(ACADEMIES);
+    const totalBase=Math.max(t.limit,t.hours,1);
+    let offset=0;
+    const segs=keys.map(k=>{
+      const sum=academySummary(k);
+      const frac=sum.hours/totalBase;
+      const len=Math.max(0,frac*c);
+      const segHtml=`<circle class="donut-seg" cx="76" cy="76" r="${r}" fill="none" stroke="${ACADEMIES[k].color}" stroke-width="18" stroke-dasharray="${len} ${c}" stroke-dashoffset="${-offset}" data-academy="${esc(k)}"><title>${esc(ACADEMIES[k].name)}: ${fmt(sum.hours)} / ${fmt(sum.limit)} ساعة (${money(sum.earned)} ج.م)</title></circle>`;
+      offset+=len;
+      return {k,sum,segHtml};
+    });
+    const legendHtml=segs.map(({k,sum})=>{
+      return `<div class="legend-item" data-academy="${esc(k)}" style="cursor:pointer">
+        <div class="legend-left"><span class="legend-dot" style="background:${ACADEMIES[k].color}"></span><span>${esc(ACADEMIES[k].short||ACADEMIES[k].name)}</span></div>
+        <div class="legend-val">${fmt(sum.hours)} / ${fmt(sum.limit)} س · ${money(sum.earned)} ج</div>
+      </div>`;
+    }).join('');
+    donutContainer.innerHTML=`
+      <div class="donut-wrap">
+        <div class="donut-svg-box">
+          <svg viewBox="0 0 152 152">
+            <circle cx="76" cy="76" r="${r}" fill="none" stroke="var(--surface-3)" stroke-width="18"></circle>
+            ${segs.map(s=>s.segHtml).join('')}
+          </svg>
+          <div class="donut-center">
+            <strong>${fmt(t.hours)}</strong>
+            <small>من ${fmt(t.limit)} س</small>
+          </div>
+        </div>
+        <div class="donut-legend">${legendHtml}</div>
+      </div>
+      <div class="kpi-foot" style="margin-top:auto">
+        <span>إجمالي الأرباح المحققة</span>
+        <strong style="color:var(--primary)">${money(t.earned)} / ${money(t.target)} ج.م</strong>
+      </div>
+    `;
+  }
+
+  // 2. Stacked Weekly Workload Bar Chart (السبت -> الجمعة)
+  const weeklyContainer=el('chartWeeklyContainer');
+  if(weeklyContainer){
+    const jsDayMap={6:'السبت',0:'الأحد',1:'الإثنين',2:'الثلاثاء',3:'الأربعاء',4:'الخميس',5:'الجمعة'};
+    const todayAr=jsDayMap[new Date().getDay()];
+    const acKeys=Object.keys(ACADEMIES);
+    const dayStats=DAYS_ORDER.map(day=>{
+      const byAc={};
+      acKeys.forEach(k=>{byAc[k]=0});
+      let count=0;
+      appState.students.filter(isStudentActive).forEach(s=>{
+        const ac=s.academy||acKeys[0]||'qurra';
+        getStudentSlots(s).filter(z=>z.day===day).forEach(z=>{
+          byAc[ac]=(byAc[ac]||0)+Number(z.duration||0.5);
+          count++;
+        });
+      });
+      const total=Object.values(byAc).reduce((a,v)=>a+v,0);
+      return {day,byAc,total,count};
+    });
+    const maxDayHrs=Math.max(...dayStats.map(d=>d.total),1);
+    const peak=[...dayStats].sort((a,b)=>b.total-a.total)[0];
+    if(el('peakDayBadge')&&peak)el('peakDayBadge').textContent=`الأعلى: ${peak.day} (${fmt(peak.total)} س)`;
+
+    const barsHtml=dayStats.map(d=>{
+      const isToday=d.day===todayAr;
+      const segs=acKeys.map(k=>{
+        const hPct=Math.round(((d.byAc[k]||0)/maxDayHrs)*100);
+        return hPct>0?`<div class="vbar-seg" style="height:${hPct}%;background:${ACADEMIES[k].color}"></div>`:'';
+      }).join('');
+      return `<div class="vbar-col ${isToday?'is-today':''}" title="${d.day}: ${fmt(d.total)} ساعة (${d.count} حصص)">
+        <span class="vbar-val">${fmt(d.total)}س</span>
+        <div class="vbar-track">
+          ${segs}
+        </div>
+        <span class="vbar-lbl">${d.day.replace('ال','')}</span>
+      </div>`;
+    }).join('');
+
+    const totalWeeklyHrs=dayStats.reduce((a,d)=>a+d.total,0);
+    const inlineLegend=acKeys.map((k,i)=>`<span style="${i>0?'margin-right:8px':''}"><i style="background:${ACADEMIES[k].color}"></i>${esc(ACADEMIES[k].short||ACADEMIES[k].name)}</span>`).join('');
+    weeklyContainer.innerHTML=`
+      <div class="vbars-wrap">
+        <div class="vbars">${barsHtml}</div>
+        <div class="chart-Legend-inline">
+          <div>${inlineLegend}</div>
+          <strong>${fmt(totalWeeklyHrs)} س / أسبوع</strong>
+        </div>
+      </div>
+    `;
+  }
+
+  // 3. Daily Logged Sessions Trend + Top Students Leaderboard
+  const trendContainer=el('chartTrendContainer');
+  if(trendContainer){
+    const byDate={};
+    t.sessions.forEach(s=>{
+      const d=s.date||'غير محدد';
+      if(!byDate[d])byDate[d]={hours:0,amount:0,count:0};
+      const h=sessionHours(s);
+      byDate[d].hours+=h;
+      byDate[d].amount+=(Number(s.amount)||h*(Number(s.rate)||60));
+      byDate[d].count++;
+    });
+    const dates=Object.keys(byDate).sort().slice(-7);
+    const maxDateH=Math.max(...dates.map(d=>byDate[d].hours),1);
+    const activeDaysCount=Object.keys(byDate).length||1;
+    const avgDaily=t.hours/activeDaysCount;
+    if(el('dailyAvgBadge'))el('dailyAvgBadge').textContent=`المتوسط: ${fmt(avgDaily)} س/يوم نشط`;
+
+    const dailyBarsHtml=dates.length?dates.map(d=>{
+      const item=byDate[d];
+      const hPct=Math.max(12,Math.round((item.hours/maxDateH)*100));
+      const shortDate=d.slice(5);
+      return `<div class="dbar-item" title="${d}: ${fmt(item.hours)} ساعة (${item.count} حصص · ${money(item.amount)} ج.م)">
+        <span class="dbar-top">${fmt(item.hours)}س</span>
+        <div class="dbar-fill" style="height:${hPct}%"></div>
+        <span class="dbar-date">${esc(shortDate)}</span>
+      </div>`;
+    }).join(''):'<div style="margin:auto;font-size:11px;color:var(--muted)">لا توجد حصص مسجلة في هذا الشهر بعد</div>';
+
+    const topStudents=appState.students.map(s=>{
+      const ss=studentSessions(s);
+      const hrs=ss.reduce((a,x)=>a+sessionHours(x),0);
+      const target=Number(s.targetHours??s.target_hours??4);
+      const pct=target>0?Math.min(100,Math.round(hrs/target*100)):0;
+      return {s,hrs,target,pct};
+    }).sort((a,b)=>b.hrs-a.hrs||b.pct-a.pct).slice(0,3);
+
+    const topStuHtml=topStudents.map(({s,hrs,target,pct})=>{
+      const col=academyColor(s.academy);
+      return `<div class="top-stu-row">
+        <div class="top-stu-head">
+          <span>${esc(s.name)} <small style="color:${col};font-weight:700">(${ACADEMIES[s.academy]?.short||''})</small></span>
+          <span>${fmt(hrs)} / ${fmt(target)} س (${pct}%)</span>
+        </div>
+        <div class="progress" style="margin-top:0;height:6px"><span style="width:${pct}%;background:${col}"></span></div>
+      </div>`;
+    }).join('');
+
+    trendContainer.innerHTML=`
+      <div class="trend-wrap">
+        <div>
+          <div style="font-size:10.5px;font-weight:800;color:var(--muted);margin-bottom:6px">الساعات المسجلة حسب التاريخ</div>
+          <div class="daily-bars">${dailyBarsHtml}</div>
+        </div>
+        <div>
+          <div style="font-size:10.5px;font-weight:800;color:var(--muted);margin-bottom:6px">أعلى الطلبة إنجازاً هذا الشهر</div>
+          <div class="top-stu-list">${topStuHtml}</div>
+        </div>
+      </div>
+    `;
+  }
+}
+function studentName(id){return appState.students.find(s=>s.id===id)?.name||'طالب محذوف'}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function studentSessions(s){return monthSessions().filter(x=>x.studentId===s.id)}
+function renderStudentCards(container,list){
+  container.innerHTML=list.map(s=>{
+    const acKeys=Object.keys(ACADEMIES);
+    const a=ACADEMIES[s.academy]||ACADEMIES[acKeys[0]]||{name:'أكاديمية',short:'أكاديمية',color:'#21a982',soft:'#e8f7f2'};
+    const ss=studentSessions(s),hours=ss.reduce((n,x)=>n+sessionHours(x),0);
+    const target=Number(s.targetHours??s.target_hours??4);
+    const rem=Math.max(0,target-hours);
+    const rate=Number(s.rate??60);
+    const earned=hours*rate;
+    const pct=target>0?Math.min(100,Math.round(hours/target*100)):0;
+    const defDur=Number(s.defaultDuration??s.default_duration??0.5);
+    const defMin=Math.round(defDur*60);
+    const active=isStudentActive(s);
+    return `<article class="student-card ${active?'':'is-inactive'}">
+      <div>
+        <div class="student-top">
+          <div class="avatar" style="background:${a.soft};color:${a.color}">${esc((s.name||'?').trim().charAt(0))}</div>
+          <div class="student-info">
+            <strong>${esc(s.name)}</strong>
+            <small>${esc(a.name)}</small>
+          </div>
+          <button type="button" class="status-pill ${active?'on':'off'}" data-toggle-status="${esc(s.id)}" title="اضغط لتغيير حالة الطالب (نشط / غير نشط)">
+            <i></i><span>${active?'نشط':'غير نشط'}</span>
+          </button>
+          <span class="pill" style="background:${a.soft};color:${a.color}">${fmt(target)} س/شهر</span>
+        </div>
+        <div class="student-schedule"><i data-lucide="calendar-clock"></i><span title="${esc(s.schedule||'')}">${esc(s.schedule||'لم يتم تحديد مواعيد')}</span></div>
+        <div class="student-metrics">
+          <div><small>المنجز / الشهري</small><strong>${fmt(hours)} / ${fmt(target)} س</strong></div>
+          <div><small>المتبقي</small><strong style="color:${rem===0?'#10b981':'#d97706'}">${rem===0?'مكتمل ✓':fmt(rem)+' س'}</strong></div>
+          <div><small>المستحق (${fmt(rate)}ج)</small><strong style="color:var(--primary)">${money(earned)} ج</strong></div>
+        </div>
+        <div class="student-prog-head"><span>الحصص المسجلة: ${ss.length}</span><span>${pct}%</span></div>
+        <div class="progress" style="margin-top:0"><span style="width:${pct}%;background:${a.color}"></span></div>
+      </div>
+      <div>
+        <div class="student-quick">
+          <button type="button" data-quick-log="${esc(s.id)}" data-duration="0.5" title="تسجيل فوري 30 دقيقة">+30 د</button>
+          <button type="button" data-quick-log="${esc(s.id)}" data-duration="0.75" title="تسجيل فوري 45 دقيقة">+45 د</button>
+          <button type="button" data-quick-log="${esc(s.id)}" data-duration="1" title="تسجيل فوري 60 دقيقة">+60 د</button>
+          <button type="button" data-log="${esc(s.id)}" data-duration="${defDur}" title="تسجيل بتاريخ أو ملاحظات مخصصة">مخصص</button>
+        </div>
+        <div class="student-actions">
+          <button class="btn btn-primary" data-quick-log="${esc(s.id)}" data-duration="${defDur}"><i data-lucide="plus-circle"></i>تسجيل (${defMin} د)</button>
+          <button class="btn" style="flex:0;padding:8px 10px" data-edit="${esc(s.id)}" title="تعديل الطالب" aria-label="تعديل الطالب"><i data-lucide="pencil"></i></button>
+          <button class="btn btn-danger" style="flex:0;padding:8px 10px" data-delete-student="${esc(s.id)}" title="حذف الطالب" aria-label="حذف الطالب"><i data-lucide="trash-2"></i></button>
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+}
+function renderStudents(){
+  const q=(el('studentSearch')?.value||'').trim().toLowerCase(),a=el('academyFilter')?.value||'all',d=el('dayFilter')?.value||'all',stFilter=el('statusFilter')?.value||'all';
+  let list=appState.students.filter(s=>{
+    const act=isStudentActive(s);
+    const matchSt=stFilter==='all'||(stFilter==='active'?act:!act);
+    const matchAc=a==='all'||s.academy===a;
+    const matchQ=!q||s.name.toLowerCase().includes(q)||(s.schedule||'').toLowerCase().includes(q);
+    const matchDay=d==='all'||(s.schedule||'').includes(d)||getStudentSlots(s).some(z=>z.day===d);
+    return matchSt&&matchAc&&matchQ&&matchDay;
+  });
+  const activeCnt=list.filter(isStudentActive).length;
+  const inactiveCnt=list.length-activeCnt;
+  el('studentCountLabel').textContent=`${list.length} طالب (${activeCnt} نشط · ${inactiveCnt} غير نشط)`;
+  renderStudentCards(el('studentsGrid'),list);
+  el('studentsEmpty').classList.toggle('hidden',list.length>0);
+  el('studentsGrid').classList.toggle('hidden',!list.length);
+}
+function toggleStudentStatus(id){
+  const s=appState.students.find(x=>x.id===id);
+  if(!s)return;
+  const next=!isStudentActive(s);
+  s.active=next;
+  s.status=next?'active':'inactive';
+  renderAll();
+  saveState();
+  toast(`تم تغيير حالة "${s.name}" إلى ${next?'نشط ✓':'غير نشط'} وتحديث المستهدف في JSON`);
+}
+function renderSchedule(){
+  const filter=el('scheduleAcademyFilter').value;
+  const jsDayMap={6:'السبت',0:'الأحد',1:'الإثنين',2:'الثلاثاء',3:'الأربعاء',4:'الخميس',5:'الجمعة'};
+  const todayAr=jsDayMap[new Date().getDay()];
+  let totalWeeklySlots=0,totalWeeklyHours=0;
+  el('daysGrid').innerHTML=DAYS_ORDER.map(day=>{
+    let slots=[];
+    appState.students.filter(s=>isStudentActive(s)&&(filter==='all'||s.academy===filter)).forEach(s=>{
+      getStudentSlots(s).filter(z=>z.day===day).forEach(z=>slots.push({s,z}));
+    });
+    slots.sort((a,b)=>(a.z.sortOrder||0)-(b.z.sortOrder||0));
+    const dayHrs=slots.reduce((acc,x)=>acc+Number(x.z.duration||0.5),0);
+    totalWeeklySlots+=slots.length;
+    totalWeeklyHours+=dayHrs;
+    const isToday=day===todayAr;
+    return `<div class="day-card ${isToday?'today-card':''}">
+      <div class="day-head">
+        <span>${day} ${isToday?'<span class="pill" style="background:var(--primary);color:#fff;margin-right:6px">اليوم</span>':''}</span>
+        <span style="color:var(--muted);font-size:11px">${slots.length} حصص · ${fmt(dayHrs)} س</span>
+      </div>
+      ${slots.length?slots.map(({s,z})=>{
+        const dur=z.duration||s.defaultDuration||.5;
+        const loggedCnt=studentSessions(s).length;
+        return `<div class="slot">
+          <div class="slot-time">${esc(z.time||'موعد غير محدد')}</div>
+          <div class="slot-main"><strong>${esc(s.name)}</strong><small style="color:${academyColor(s.academy)}">${ACADEMIES[s.academy]?.short||''} · ${esc(z.durationText||'30 دقيقة')} · (${loggedCnt} مسجلة)</small></div>
+          <button class="btn btn-soft" data-quick-log="${esc(s.id)}" data-duration="${dur}" data-slot-day="${esc(day)}" title="تسجيل فوري">+ تسجيل</button>
+          <button class="btn" style="padding:6px 8px" data-log="${esc(s.id)}" data-duration="${dur}" title="تسجيل بتاريخ مخصص"><i data-lucide="calendar-plus"></i></button>
+        </div>`;
+      }).join(''):'<div class="empty" style="padding:24px">لا توجد حصص مجدولة في هذا اليوم</div>'}
+    </div>`;
+  }).join('');
+  if(el('scheduleTotalBadge'))el('scheduleTotalBadge').textContent=`${totalWeeklySlots} حصة أسبوعياً · ${fmt(totalWeeklyHours)} ساعة/أسبوع`;
+}
+function renderSessions(){
+  const filter=el('logAcademyFilter').value;
+  const q=(el('sessionSearch')?.value||'').trim().toLowerCase();
+  const ss=monthSessions().filter(x=>{
+    const sName=(x.studentName||studentName(x.studentId)).toLowerCase();
+    const ac=resolveSessionAcademy(x);
+    const matchAc=filter==='all'||ac===filter;
+    const matchQ=!q||sName.includes(q)||String(x.date||'').includes(q)||String(x.notes||'').toLowerCase().includes(q);
+    return matchAc&&matchQ;
+  }).sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+  const totalH=ss.reduce((a,x)=>a+sessionHours(x),0);
+  const totalEgp=ss.reduce((a,x)=>a+(Number(x.amount)||sessionHours(x)*(Number(x.rate)||60)),0);
+  el('sessionCountLabel').textContent=`${ss.length} حصة · ${fmt(totalH)} ساعة · ${money(totalEgp)} ج.م`;
+  el('sessionsBody').innerHTML=ss.map(x=>{
+    const ac=resolveSessionAcademy(x);
+    return `<tr><td>${esc(x.date||'—')}</td><td><strong>${esc(x.studentName||studentName(x.studentId))}</strong></td><td><span class="academy-tag" style="color:${academyColor(ac)}"><i style="background:${academyColor(ac)}"></i>${academyName(ac)}</span></td><td><strong>${fmt(sessionHours(x))} س</strong> (${fmt(sessionHours(x)*60)} د)</td><td><strong style="color:var(--primary)">${money(x.amount||sessionHours(x)*(x.rate||60))} ج.م</strong></td><td>${esc(x.notes||'—')}</td><td><button class="table-action" data-delete-session="${esc(x.id)}" title="حذف الحصة"><i data-lucide="trash-2"></i></button></td></tr>`;
+  }).join('');
+  el('sessionsEmpty').classList.toggle('hidden',ss.length>0);
+  el('sessionsBody').parentElement.classList.toggle('hidden',!ss.length);
+}
+function renderAnalytics(){
+  const acFilter=el('analyticsAcademyFilter')?.value||'all';
+  const jsDayMap={6:'السبت',0:'الأحد',1:'الإثنين',2:'الثلاثاء',3:'الأربعاء',4:'الخميس',5:'الجمعة'};
+  const todayAr=jsDayMap[new Date().getDay()];
+
+  const HOUR_BUCKETS=[
+    {key:'afternoon',label:'بعد الظهر',short:'ظهراً'},
+    {key:'12',label:'12:00 ظ',short:'12ظ'},
+    {key:'1',label:'1:00 م',short:'1م'},
+    {key:'2',label:'2:00 م',short:'2م'},
+    {key:'3',label:'3:00 م',short:'3م'},
+    {key:'4',label:'4:00 م',short:'4م'},
+    {key:'5',label:'5:00 م',short:'5م'},
+    {key:'6',label:'6:00 م',short:'6م'},
+    {key:'7',label:'7:00 م',short:'7م'},
+    {key:'8',label:'8:00 م',short:'8م'},
+    {key:'9',label:'9:00 م',short:'9م'},
+    {key:'10',label:'10:00 م',short:'10م'}
+  ];
+
+  function detectBucketKey(timeStr){
+    const t=String(timeStr||'').trim();
+    if(!t||t.includes('بعد الظهر'))return 'afternoon';
+    const m=t.match(/(\d{1,2}):(\d{2})/);
+    if(!m)return 'afternoon';
+    const h=Number(m[1]);
+    if(h===12)return '12';
+    if(h>=1&&h<=10)return String(h);
+    if(h===11)return '10';
+    if(h>=13&&h<=22)return String(h-12);
+    if(h===23)return '10';
+    return 'afternoon';
+  }
+
+  // Gather all scheduled slots across the 7 days
+  const acKeys=Object.keys(ACADEMIES);
+  if(el('anMatrixLegend')){
+    el('anMatrixLegend').innerHTML=acKeys.map(k=>`<span><i style="background:${ACADEMIES[k].color}"></i>${esc(ACADEMIES[k].short||ACADEMIES[k].name)}</span>`).join('');
+  }
+  const dayData={};
+  DAYS_ORDER.forEach(d=>{
+    const byAcInit={};
+    acKeys.forEach(k=>{byAcInit[k]=0});
+    dayData[d]={
+      day:d,
+      slots:[],
+      schedHours:0,
+      byAc:byAcInit,
+      loggedSessions:0,
+      loggedHours:0,
+      loggedEarned:0
+    };
+  });
+
+  const bucketStats={};
+  HOUR_BUCKETS.forEach(b=>{
+    bucketStats[b.key]={...b,hours:0,count:0,byDay:{}};
+    DAYS_ORDER.forEach(d=>{bucketStats[b.key].byDay[d]=[]});
+  });
+
+  const activeStudentsFiltered=appState.students.filter(s=>isStudentActive(s)&&(acFilter==='all'||s.academy===acFilter));
+  activeStudentsFiltered.forEach(s=>{
+    const ac=s.academy||acKeys[0]||'qurra';
+    const sSlots=getStudentSlots(s);
+    sSlots.forEach(z=>{
+      if(!dayData[z.day])return;
+      const dur=Number(z.duration||s.defaultDuration||0.5);
+      const bKey=detectBucketKey(z.time);
+      const item={student:s,slot:z,dur,bKey};
+      dayData[z.day].slots.push(item);
+      dayData[z.day].schedHours+=dur;
+      dayData[z.day].byAc[ac]=(dayData[z.day].byAc[ac]||0)+dur;
+      if(bucketStats[bKey]){
+        bucketStats[bKey].hours+=dur;
+        bucketStats[bKey].count++;
+        bucketStats[bKey].byDay[z.day].push(item);
+      }
+    });
+  });
+
+  // Map logged sessions in active month to their scheduled/actual Arabic day of week
+  const mSessions=monthSessions().filter(x=>acFilter==='all'||resolveSessionAcademy(x)===acFilter);
+  const stuRoundRobin={};
+  mSessions.forEach(ses=>{
+    const st=appState.students.find(s=>s.id===ses.studentId);
+    const stSlots=st?getStudentSlots(st):[];
+    const stDays=stSlots.map(z=>z.day).filter(d=>dayData[d]);
+    let targetDay=null;
+    if(ses.slotDay&&dayData[ses.slotDay]){
+      targetDay=ses.slotDay;
+    }else if(stDays.length===1){
+      targetDay=stDays[0];
+    }else if(stDays.length>1){
+      const dt=ses.date?new Date(ses.date+'T12:00:00'):null;
+      const calDay=dt&&!isNaN(dt)?jsDayMap[dt.getDay()]:null;
+      if(calDay&&stDays.includes(calDay)&&ses.date!=='2026-11-15'){
+        targetDay=calDay;
+      }else{
+        const idx=stuRoundRobin[ses.studentId]||0;
+        targetDay=stDays[idx%stDays.length];
+        stuRoundRobin[ses.studentId]=idx+1;
+      }
+    }else if(ses.date){
+      const dt=new Date(ses.date+'T12:00:00');
+      if(!isNaN(dt))targetDay=jsDayMap[dt.getDay()];
+    }
+    if(targetDay&&dayData[targetDay]){
+      const h=sessionHours(ses);
+      const amt=Number(ses.amount)||h*(Number(ses.rate)||60);
+      dayData[targetDay].loggedSessions++;
+      dayData[targetDay].loggedHours+=h;
+      dayData[targetDay].loggedEarned+=amt;
+    }
+  });
+
+  const daysArr=DAYS_ORDER.map(d=>dayData[d]);
+  const sortedByLoad=[...daysArr].sort((a,b)=>b.schedHours-a.schedHours||b.slots.length-a.slots.length);
+  const peakDay=sortedByLoad[0];
+  const lightDay=sortedByLoad[sortedByLoad.length-1];
+  const totalWeeklyHrs=daysArr.reduce((a,d)=>a+d.schedHours,0);
+  const totalWeeklySlots=daysArr.reduce((a,d)=>a+d.slots.length,0);
+  const totalLoggedHrs=daysArr.reduce((a,d)=>a+d.loggedHours,0);
+  const totalTargetHrs=acFilter==='all'
+    ?acKeys.reduce((a,k)=>a+monthLimit(k),0)
+    :monthLimit(acFilter);
+  const expectedMonthlyHrs=totalTargetHrs>0?totalTargetHrs:(totalWeeklyHrs*4);
+  const fulfillPct=expectedMonthlyHrs>0?Math.round((totalLoggedHrs/expectedMonthlyHrs)*100):0;
+
+  const clockBuckets=Object.values(bucketStats).filter(b=>b.key!=='afternoon'&&b.hours>0).sort((a,b)=>b.hours-a.hours||b.count-a.count);
+  const sortedBuckets=Object.values(bucketStats).sort((a,b)=>b.hours-a.hours||b.count-a.count);
+  const peakBucket=clockBuckets[0]||sortedBuckets[0];
+
+  if(el('anKpiPeakDay'))el('anKpiPeakDay').textContent=peakDay?peakDay.day:'—';
+  if(el('anKpiPeakDaySub'))el('anKpiPeakDaySub').textContent=peakDay?`${peakDay.slots.length} حصص (${fmt(peakDay.schedHours)} س/أسبوع)`:'—';
+  if(el('anKpiLightDay'))el('anKpiLightDay').textContent=lightDay?`الأخف: ${lightDay.day} (${fmt(lightDay.schedHours)} س)`:'—';
+
+  if(el('anKpiPeakHour'))el('anKpiPeakHour').textContent=peakBucket&&peakBucket.hours>0?peakBucket.label:'—';
+  if(el('anKpiPeakHourSub'))el('anKpiPeakHourSub').textContent=peakBucket?`${peakBucket.count} حصص (${fmt(peakBucket.hours)} س أسبوعياً)`:'—';
+  if(el('anKpiWindow'))el('anKpiWindow').textContent='الذروة: 5:00 م – 9:00 م';
+
+  if(el('anKpiWeeklyHrs'))el('anKpiWeeklyHrs').textContent=fmt(totalWeeklyHrs);
+  if(el('anKpiAvgDay'))el('anKpiAvgDay').textContent=`المتوسط اليومي: ${fmt(totalWeeklyHrs/7)} س`;
+  if(el('anKpiWeeklyCount'))el('anKpiWeeklyCount').textContent=`${totalWeeklySlots} حصة/أسبوع`;
+
+  if(el('anKpiFulfillPct'))el('anKpiFulfillPct').textContent=fulfillPct+'%';
+  if(el('anKpiLoggedSub'))el('anKpiLoggedSub').textContent=`${fmt(totalLoggedHrs)} ساعة مسجلة`;
+  if(el('anKpiExpectedSub'))el('anKpiExpectedSub').textContent=`من ${fmt(expectedMonthlyHrs)} س مستهدفة`;
+
+  // 1. Render 7-Day Comparison Bars (Scheduled Weekly×4 vs Logged Actual)
+  const maxDayCompare=Math.max(...daysArr.map(d=>Math.max(d.schedHours*4,d.loggedHours)),1);
+  if(el('anDaysComparison')){
+    el('anDaysComparison').innerHTML=daysArr.map(d=>{
+      const expMonth=d.schedHours*4;
+      const acSpans=acKeys.map(k=>{
+        const pct=expMonth>0?((d.byAc[k]||0)*4/maxDayCompare)*100:0;
+        return `<span style="width:${pct}%;background:${ACADEMIES[k].color}" title="${esc(ACADEMIES[k].short||ACADEMIES[k].name)}: ${fmt((d.byAc[k]||0)*4)} س"></span>`;
+      }).join('');
+      const logPct=Math.min(100,(d.loggedHours/maxDayCompare)*100);
+      const dayFulfill=expMonth>0?Math.round((d.loggedHours/expMonth)*100):0;
+      const isToday=d.day===todayAr;
+      return `<div class="day-comp-row ${isToday?'is-today':''}">
+        <div class="day-comp-top">
+          <div class="day-comp-name">
+            <span>${d.day}</span>
+            ${isToday?'<span class="pill" style="background:var(--primary);color:#fff">اليوم</span>':''}
+            <span class="pill" style="background:var(--surface);border:1px solid var(--line);color:var(--text-secondary)">${d.slots.length} حصة/أسبوع (${fmt(d.schedHours)} س)</span>
+          </div>
+          <div class="day-comp-stats">
+            <span>المتوقع شهرياً: <b>${fmt(expMonth)} س</b></span>
+            <span>المنجز: <b style="color:var(--primary)">${fmt(d.loggedHours)} س (${dayFulfill}%)</b></span>
+            <span>الأرباح: <b>${money(d.loggedEarned)} ج</b></span>
+          </div>
+        </div>
+        <div class="dual-bars">
+          <div class="dual-bar-line">
+            <span>المجدول (×4)</span>
+            <div class="dual-track">
+              ${acSpans}
+            </div>
+            <span style="text-align:left">${fmt(expMonth)} س</span>
+          </div>
+          <div class="dual-bar-line">
+            <span>المسجل فعلياً</span>
+            <div class="dual-track">
+              <span style="width:${logPct}%;background:linear-gradient(90deg,#10b981,#059669)"></span>
+            </div>
+            <span style="text-align:left;color:var(--primary)">${fmt(d.loggedHours)} س</span>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // 2. Render Hourly Time-of-Day SVG Curve + Heat Strip
+  if(el('anHourlyCurve')){
+    const bList=HOUR_BUCKETS.map(b=>bucketStats[b.key]);
+    const maxBH=Math.max(...bList.map(b=>b.hours),1);
+    const W=540,H=195,padL=24,padR=24,padT=26,padB=32;
+    const stepX=(W-padL-padR)/Math.max(1,bList.length-1);
+    const pts=bList.map((b,i)=>{
+      const x=Math.round(padL+i*stepX);
+      const y=Math.round(H-padB-(b.hours/maxBH)*(H-padT-padB));
+      return {x,y,b};
+    });
+    const linePath=pts.map((p,i)=>(i===0?`M ${p.x} ${p.y}`:`L ${p.x} ${p.y}`)).join(' ');
+    const areaPath=`${linePath} L ${pts[pts.length-1].x} ${H-padB} L ${pts[0].x} ${H-padB} Z`;
+
+    const svgHtml=`<div class="hourly-svg-wrap">
+      <svg viewBox="0 0 ${W} ${H}">
+        <defs>
+          <linearGradient id="hrAreaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2563eb" stop-opacity="0.34"/>
+            <stop offset="100%" stop-color="#0d9b78" stop-opacity="0.02"/>
+          </linearGradient>
+        </defs>
+        <line x1="${padL}" y1="${H-padB}" x2="${W-padR}" y2="${H-padB}" stroke="var(--line-strong)" stroke-width="1"/>
+        <path d="${areaPath}" fill="url(#hrAreaGrad)"/>
+        <path d="${linePath}" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        ${pts.map(p=>`
+          <g>
+            <line x1="${p.x}" y1="${p.y}" x2="${p.x}" y2="${H-padB}" stroke="var(--line)" stroke-dasharray="3 3"/>
+            <circle cx="${p.x}" cy="${p.y}" r="${p.b.hours>0?5.5:3.5}" fill="${p.b.hours>0?'#0d9b78':'var(--muted)'}" stroke="var(--surface)" stroke-width="2">
+              <title>${p.b.label}: ${fmt(p.b.hours)} ساعة أسبوعياً (${p.b.count} حصص)</title>
+            </circle>
+            ${p.b.hours>0?`<text x="${p.x}" y="${p.y-9}" text-anchor="middle" font-size="10" font-weight="800" fill="var(--text)">${fmt(p.b.hours)}س</text>`:''}
+            <text x="${p.x}" y="${H-10}" text-anchor="middle" font-size="10" font-weight="700" fill="var(--muted)">${p.b.short}</text>
+          </g>
+        `).join('')}
+      </svg>
+    </div>`;
+
+    const heatStripHtml=`<div class="heat-Strip">
+      ${bList.map(b=>{
+        const intensity=b.hours/maxBH;
+        const bg=b.hours===0?'var(--surface-2)':`rgba(13,155,120,${(0.12+intensity*0.75).toFixed(2)})`;
+        const col=intensity>0.55?'#fff':'var(--text)';
+        return `<div class="heat-pill" style="background:${bg};color:${col}" title="${b.label}: ${b.count} حصص (${fmt(b.hours)} ساعة)">
+          <div>${b.short}</div>
+          <small>${b.count} حصة</small>
+        </div>`;
+      }).join('')}
+    </div>`;
+
+    el('anHourlyCurve').innerHTML=svgHtml+heatStripHtml;
+  }
+
+  // 3. Render 7-Day × Time-of-Day Matrix
+  if(el('anMatrixContainer')){
+    const headCols=DAYS_ORDER.map(d=>{
+      const isToday=d===todayAr;
+      return `<th class="${isToday?'is-today-col':''}">${d}<br><small style="font-weight:700;opacity:.75">${dayData[d].slots.length} حصص · ${fmt(dayData[d].schedHours)} س</small></th>`;
+    }).join('');
+
+    const bodyRows=HOUR_BUCKETS.map(b=>{
+      const cells=DAYS_ORDER.map(d=>{
+        const items=bucketStats[b.key].byDay[d]||[];
+        if(!items.length){
+          return `<td class="dt-cell free-slot"><div class="dt-free-lbl">متاح</div></td>`;
+        }
+        const chips=items.map(({student,slot,dur})=>{
+          const a=ACADEMIES[student.academy]||ACADEMIES[acKeys[0]]||{color:'#21a982',soft:'#e8f7f2'};
+          const tStr=String(slot.time||'').replace('بعد الظهر (غير محدد)','بعد الظهر');
+          return `<div class="dt-slot-chip" style="--chip-col:${a.color};--chip-bg:${a.soft}" data-quick-log="${esc(student.id)}" data-duration="${dur}" data-slot-day="${esc(d)}" title="اضغط لتسجيل حصة فورية لـ ${esc(student.name)} (${esc(tStr)})">
+            <span>${esc(student.name)}</span>
+            <small><span>${esc(tStr)}</span><b>${Math.round(dur*60)}د</b></small>
+          </div>`;
+        }).join('');
+        return `<td class="dt-cell has-slots">${chips}</td>`;
+      }).join('');
+      return `<tr><td class="time-col">${b.label}</td>${cells}</tr>`;
+    }).join('');
+
+    el('anMatrixContainer').innerHTML=`<table class="dt-matrix">
+      <thead><tr><th>الساعة / اليوم</th>${headCols}</tr></thead>
+      <tbody>${bodyRows}</tbody>
+    </table>`;
+  }
+
+  // 4. Render 7-Day Analytical Summary Table
+  if(el('anDaysTableBody')){
+    el('anDaysTableBody').innerHTML=daysArr.map(d=>{
+      const freeBuckets=HOUR_BUCKETS.filter(b=>b.key!=='afternoon'&&b.key!=='12'&&!(bucketStats[b.key].byDay[d.day]||[]).length).map(b=>b.label).slice(0,4);
+      const isToday=d.day===todayAr;
+      const acPills=acKeys.map(k=>`<span class="pill" style="background:${ACADEMIES[k].soft};color:${ACADEMIES[k].color};margin-left:3px">${esc(ACADEMIES[k].short||ACADEMIES[k].name)}: ${fmt(d.byAc[k]||0)}س</span>`).join('');
+      return `<tr>
+        <td><strong>${d.day}</strong> ${isToday?'<span class="pill" style="background:var(--primary);color:#fff">اليوم</span>':''}</td>
+        <td><strong>${d.slots.length} حصص</strong></td>
+        <td><strong>${fmt(d.schedHours)} س/أسبوع</strong> <small style="color:var(--muted)">(${fmt(d.schedHours*4)} س/شهر)</small></td>
+        <td>${acPills}</td>
+        <td><strong>${fmt(d.loggedHours)} ساعة</strong> (${d.loggedSessions} حصة)</td>
+        <td><strong style="color:var(--primary)">${money(d.loggedEarned)} ج.م</strong></td>
+        <td>${freeBuckets.length?freeBuckets.map(fb=>`<span class="pill" style="background:var(--surface-2);border:1px solid var(--line);margin-left:4px">${fb}</span>`).join(''):'<span style="color:var(--muted)">ممتلئ</span>'}</td>
+      </tr>`;
+    }).join('');
+  }
+}
+
+function renderAll(){
+  ensureMonth();
+  el('monthSelector').value=appState.currentMonth;
+  el('todayLabel').textContent=MONTH_NAMES[appState.currentMonth]||appState.currentMonth;
+  renderSidebarMeta();
+  renderOverview();
+  try{renderAnalytics();}catch(e){console.error('Analytics render error:',e);}
+  renderStudents();
+  renderSchedule();
+  renderSessions();
+  setTheme();
+  syncSidebarUI();
+  iconRefresh();
+}
+function openModal(title,content,submitText,handler){el('modalTitle').textContent=title;el('modalContent').innerHTML=content;el('modalSubmit').textContent=submitText||'حفظ';el('modalBackdrop').classList.add('open');el('modalForm').onsubmit=e=>{e.preventDefault();handler(new FormData(e.currentTarget));};iconRefresh()}
+function closeModal(){el('modalBackdrop').classList.remove('open');el('modalForm').onsubmit=null}
+function deleteStudent(id){const s=appState.students.find(x=>x.id===id);if(!s)return;if(!confirm(`هل تريد حذف الطالب "${s.name}" وحصصه المسجلة؟`))return;appState.students=appState.students.filter(x=>x.id!==id);appState.sessions=appState.sessions.filter(x=>x.studentId!==id);renderAll();saveState();toast('تم حذف الطالب وتحديث جميع الإحصائيات وملف JSON')}
+
+function academyModal(editId){
+  const existing=editId?ACADEMIES[editId]:null;
+  const usedColors=Object.values(ACADEMIES).map(a=>a.color);
+  const defaultPreset=existing
+    ?(ACADEMY_COLOR_PRESETS.find(p=>p.color.toLowerCase()===String(existing.color).toLowerCase())||{color:existing.color,soft:existing.soft})
+    :(ACADEMY_COLOR_PRESETS.find(p=>!usedColors.includes(p.color))||ACADEMY_COLOR_PRESETS[Object.keys(ACADEMIES).length%ACADEMY_COLOR_PRESETS.length]);
+  let chosenColor=defaultPreset.color;
+  let chosenSoft=defaultPreset.soft||'#e8f7f2';
+  const curTarget=editId?monthLimit(editId):20;
+  const curRate=editId?monthRate(editId):60;
+
+  const swatchesHtml=ACADEMY_COLOR_PRESETS.map(p=>`<button type="button" class="color-swatch ${p.color===chosenColor?'active':''}" style="background:${p.color}" data-ac-color="${p.color}" data-ac-soft="${p.soft}" title="${p.label}"><i data-lucide="check"></i></button>`).join('');
+
+  const content=`<div class="form-grid">
+    <div class="form-group"><label>اسم الأكاديمية الكامل</label><input name="name" id="acNameInp" required value="${esc(existing?.name||'')}" placeholder="مثال: أكاديمية البيان"></div>
+    <div class="form-group"><label>الاسم المختصر (للبطاقات والرسوم)</label><input name="short" id="acShortInp" value="${esc(existing?.short||'')}" placeholder="مثال: البيان"></div>
+    <div class="form-group"><label>الحد الشهري المستهدف (ساعات)</label><input name="targetHours" type="number" min="0" step="0.5" required value="${curTarget}"></div>
+    <div class="form-group"><label>سعر الساعة الافتراضي (ج.م)</label><input name="defaultRate" type="number" min="0" required value="${curRate}"></div>
+    <div class="form-group full">
+      <label>لون تمييز الأكاديمية</label>
+      <div class="color-swatches" id="acSwatches">${swatchesHtml}</div>
+    </div>
+  </div>`;
+
+  openModal(existing?'تعديل بيانات الأكاديمية':'إضافة أكاديمية جديدة',content,existing?'حفظ التعديلات':'إضافة الأكاديمية',fd=>{
+    const name=String(fd.get('name')||'').trim();
+    if(!name)return;
+    const short=String(fd.get('short')||'').trim()||name.replace(/^أكاديمية\s+/,'').trim()||name;
+    const targetHours=Number(fd.get('targetHours'))||0;
+    const defaultRate=Number(fd.get('defaultRate'))||60;
+    const id=editId||('ac_'+Date.now());
+    ACADEMIES[id]={name,short,color:chosenColor,soft:chosenSoft};
+    appState.academies=ACADEMIES;
+    ensureMonth();
+    appState.limits[appState.currentMonth][id]={targetHours,defaultRate};
+    closeModal();
+    renderAll();
+    saveState();
+    toast(existing?`تم تحديث "${name}" وحفظها في JSON`:`تمت إضافة "${name}" وحفظها في JSON`);
+  });
+
+  const nameInp=el('acNameInp'),shortInp=el('acShortInp');
+  if(nameInp&&shortInp&&!existing){
+    nameInp.oninput=()=>{
+      if(!shortInp.dataset.touched){
+        shortInp.value=nameInp.value.replace(/^أكاديمية\s+/,'').trim();
+      }
+    };
+    shortInp.oninput=()=>{shortInp.dataset.touched='1'};
+  }
+  const swWrap=el('acSwatches');
+  if(swWrap){
+    swWrap.onclick=e=>{
+      const btn=e.target.closest('[data-ac-color]');
+      if(!btn)return;
+      chosenColor=btn.dataset.acColor;
+      chosenSoft=btn.dataset.acSoft;
+      swWrap.querySelectorAll('.color-swatch').forEach(b=>b.classList.toggle('active',b===btn));
+    };
+  }
+}
+
+function deleteAcademy(id){
+  const a=ACADEMIES[id];
+  if(!a)return;
+  const keys=Object.keys(ACADEMIES);
+  if(keys.length<=1){
+    alert('لا يمكن حذف الأكاديمية الوحيدة المتبقية.');
+    return;
+  }
+  const stuCount=appState.students.filter(s=>s.academy===id).length;
+  const sesCount=appState.sessions.filter(s=>s.academy===id).length;
+  const msg=stuCount>0||sesCount>0
+    ?`تحتوي "${a.name}" على ${stuCount} طالب و ${sesCount} حصة مسجلة.\nهل تريد حذف الأكاديمية وحذف بياناتها المرتبطة؟`
+    :`هل تريد حذف "${a.name}"؟`;
+  if(!confirm(msg))return;
+  delete ACADEMIES[id];
+  appState.academies=ACADEMIES;
+  if(appState.limits[appState.currentMonth]){
+    delete appState.limits[appState.currentMonth][id];
+  }
+  appState.students=appState.students.filter(s=>s.academy!==id);
+  appState.sessions=appState.sessions.filter(s=>s.academy!==id);
+  renderAll();
+  saveState();
+  toast(`تم حذف "${a.name}" وتحديث ملف JSON`);
+}
+
+/* ===== Weekly schedule picker (calendar-style day & time selection) ===== */
+function pkTo24(t){const m=String(t||'').match(/(\d{1,2}):(\d{2})/);if(!m)return '';let h=+m[1];if(h>=1&&h<=11)h+=12;return String(h).padStart(2,'0')+':'+m[2]}
+function pkFmt12(hhmm){if(!hhmm)return '';const [h,m]=hhmm.split(':').map(Number);return (h%12||12)+':'+String(m).padStart(2,'0')}
+function pkPeriod(hhmm){if(!hhmm)return '';const h=+hhmm.split(':')[0];return h<12?'صباحاً':(h<17?'ظهراً':'مساءً')}
+function pkAddMin(hhmm,mins){const [h,m]=hhmm.split(':').map(Number);const t=((h*60+m+Number(mins))%1440+1440)%1440;return String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}
+function pkSort(hhmm){if(!hhmm)return 100;const [h,m]=hhmm.split(':').map(Number);return (h%12)*100+m}
+function pkTimeText(p){return p.start?`${pkFmt12(p.start)} - ${pkFmt12(pkAddMin(p.start,p.mins))}`:(p.raw||'5:00 - 5:30')}
+
+function studentModal(student){
+  const s=student||{};
+  const acKeys=Object.keys(ACADEMIES);
+  const currentFilterAc=el('academyFilter')?.value;
+  const defaultAc=s.academy||(currentFilterAc&&currentFilterAc!=='all'?currentFilterAc:acKeys[0]||'qurra');
+  const defaultRateVal=s.rate??monthRate(defaultAc)??60;
+  const defDur=Number(s.defaultDuration??s.default_duration??.5);
+  const isAct=student?isStudentActive(s):true;
+  const seen=new Set();
+  const baseSlots=student?(s.slots||[]):[
+    {day:'السبت',time:'5:00 - 5:30',duration:defDur},
+    {day:'الثلاثاء',time:'5:00 - 5:30',duration:defDur}
+  ];
+  let picked=baseSlots.filter(z=>DAYS_ORDER.includes(z.day)&&!seen.has(z.day)&&seen.add(z.day)).map(z=>({
+    day:z.day,
+    start:pkTo24(z.time)||'17:00',
+    mins:Math.round((Number(z.duration)||defDur)*60),
+    raw:pkTo24(z.time)?'':z.time
+  }));
+  const durOpts=m=>[30,45,60,90,120].map(v=>`<option value="${v}" ${v===m?'selected':''}>${v} دقيقة</option>`).join('');
+  const acOpts=acKeys.map(k=>`<option value="${esc(k)}" ${defaultAc===k?'selected':''}>${esc(ACADEMIES[k].name)}</option>`).join('');
+  const content=`<div class="form-grid">
+    <div class="form-group"><label>اسم الطالب / المجموعة</label><input name="name" required value="${esc(s.name||'')}" placeholder="مثال: أحمد عيد"></div>
+    <div class="form-group"><label>حالة الطالب</label><select name="activeStatus"><option value="active" ${isAct?'selected':''}>نشط (مستمر)</option><option value="inactive" ${!isAct?'selected':''}>غير نشط (متوقف / ملغي)</option></select></div>
+    <div class="form-group"><label>الأكاديمية</label><select name="academy" id="pkAcademy">${acOpts}</select></div>
+    <div class="form-group"><label>سعر الساعة (ج.م)</label><input name="rate" id="pkRate" type="number" min="0" value="${defaultRateVal}" required></div>
+    <div class="form-group"><label>الباقة الشهرية (ساعات)</label><input name="targetHours" id="pkTarget" type="number" min="0" step=".25" value="${s.targetHours??s.target_hours??4}"></div>
+    <div class="form-group"><label>مدة الحصة الافتراضية</label><select name="defaultDuration" id="pkDefDur">${[.5,.75,1,1.5].map(v=>`<option value="${v}" ${v===defDur?'selected':''}>${v*60} دقيقة</option>`).join('')}</select></div>
+    <div class="form-group full"><label>مواعيد الحصص</label>
+      <div class="pk-wrap">
+        <div class="pk-step"><b>1</b>اختر أيام الحصص</div>
+        <div class="day-picker" id="pkDays"></div>
+        <div class="pk-step"><b>2</b>حدد وقت بداية ومدة كل حصة</div>
+        <div class="slot-rows" id="pkRows"></div>
+        <div class="pk-tools" id="pkTools">
+          <button type="button" data-pk-copy><i data-lucide="copy"></i>نفس وقت أول يوم لكل الأيام</button>
+          <button type="button" data-pk-clear><i data-lucide="eraser"></i>مسح الكل</button>
+        </div>
+        <div class="pk-preview" id="pkPreview"></div>
+      </div>
+    </div>
+  </div>`;
+  openModal(student?'تعديل بيانات الطالب':'إضافة طالب جديد',content,student?'حفظ التعديلات':'إضافة الطالب',fd=>{
+    const name=String(fd.get('name')||'').trim();if(!name)return;
+    const actVal=fd.get('activeStatus')!=='inactive';
+    const duration=Number(fd.get('defaultDuration'))||.5;
+    let th=Number(fd.get('targetHours'))||0;
+    const ordered=[...picked].sort((a,b)=>DAYS_ORDER.indexOf(a.day)-DAYS_ORDER.indexOf(b.day));
+    let slots=ordered.map(p=>({day:p.day,time:pkTimeText(p),sortOrder:pkSort(p.start||'17:00'),duration:p.mins/60,durationText:p.mins+' دقيقة'}));
+    if(actVal&&!slots.length&&th>0){
+      const count=Math.max(1,Math.min(7,Math.round((th/4)/duration)));
+      const perDur=(th/4)/count;
+      const defDays=['السبت','الثلاثاء','الأحد','الأربعاء','الإثنين','الخميس','الجمعة'];
+      slots=Array.from({length:count},(_,i)=>({
+        day:defDays[i%defDays.length],
+        time:`5:00 - ${pkFmt12(pkAddMin('17:00',Math.round(perDur*60)))}`,
+        sortOrder:500,
+        duration:perDur,
+        durationText:Math.round(perDur*60)+' دقيقة'
+      }));
+    }
+    if(actVal&&slots.length&&th<=0){
+      th=slots.reduce((a,z)=>a+Number(z.duration||duration),0)*4;
+    }
+    const schedule=slots.length?slots.map(z=>`${z.day} ${z.time}`).join('، '):(s.schedule||(actVal?'':'ملغي'));
+    const newRate=Number(fd.get('rate'))||60;
+    const newAc=fd.get('academy');
+    const data={name,academy:newAc,active:actVal,status:actVal?'active':'inactive',rate:newRate,targetHours:th,target_hours:th,defaultDuration:duration,default_duration:duration,schedule,slots};
+    if(student){
+      Object.assign(student,data);
+      appState.sessions.forEach(ses=>{
+        if(ses.studentId===student.id){
+          ses.studentName=name;
+          ses.academy=newAc;
+          ses.rate=newRate;
+          ses.amount=Number(ses.duration||0)*newRate;
+        }
+      });
+    }else{
+      appState.students.unshift({id:'stu_'+Date.now(),...data});
+    }
+    closeModal();renderAll();saveState();toast(student?'تم تحديث الطالب وتحديث جميع الإحصائيات وملف JSON':'تمت إضافة الطالب وتحديث جميع الإحصائيات وملف JSON');
+  });
+
+  const daysEl=el('pkDays'),rowsEl=el('pkRows'),prevEl=el('pkPreview'),targetInp=el('pkTarget'),defDurSel=el('pkDefDur'),acSel=el('pkAcademy'),rateInp=el('pkRate');
+  if(targetInp){
+    targetInp.oninput=()=>{targetInp.dataset.manual='1'};
+  }
+  if(acSel&&rateInp&&!student){
+    acSel.onchange=()=>{rateInp.value=monthRate(acSel.value)};
+  }
+  const sortedPicked=()=>[...picked].sort((a,b)=>DAYS_ORDER.indexOf(a.day)-DAYS_ORDER.indexOf(b.day));
+  function syncTargetFromPicked(){
+    const list=sortedPicked();
+    if(!list.length||!targetInp||targetInp.dataset.manual==='1')return;
+    const weeklyMin=list.reduce((a,p)=>a+Number(p.mins),0);
+    const monthly=Math.round(weeklyMin/60*4*4)/4;
+    if(monthly>0)targetInp.value=monthly;
+  }
+  function renderDays(){daysEl.innerHTML=DAYS_ORDER.map(d=>`<button type="button" class="day-chip ${picked.some(p=>p.day===d)?'on':''}" data-pk-day="${d}"><i class="ck"></i>${d}</button>`).join('')}
+  function renderPreview(){
+    const list=sortedPicked();
+    if(!list.length){prevEl.innerHTML='<small>معاينة المواعيد</small>لم يتم اختيار أي يوم بعد — اضغط على الأيام بالأعلى.';return}
+    const weeklyMin=list.reduce((a,p)=>a+Number(p.mins),0),monthly=Math.round(weeklyMin/60*4*4)/4;
+    prevEl.innerHTML=`<small>معاينة المواعيد (تظهر هكذا في بطاقة الطالب والجدول والتحليل)</small>${esc(list.map(p=>`${p.day} ${pkTimeText(p)}`).join('، '))}
+      <div class="pk-sum"><span>${list.length} حصص/أسبوع · ${fmt(weeklyMin/60)} س أسبوعياً ≈ <b>${fmt(monthly)} س شهرياً</b></span><button type="button" data-pk-apply="${monthly}">اعتمادها كباقة شهرية</button></div>`;
+  }
+  function renderRows(){
+    const list=sortedPicked();
+    rowsEl.innerHTML=list.length?list.map(p=>`<div class="slot-row ${!p.start&&!p.raw?'missing':''}" data-row="${p.day}">
+      <div class="d-name">${p.day}<span class="d-end" data-end="${p.day}">${p.start?`حتى ${pkFmt12(pkAddMin(p.start,p.mins))} ${pkPeriod(pkAddMin(p.start,p.mins))}`:(p.raw?esc(p.raw):'حدد الوقت')}</span></div>
+      <input type="time" step="300" value="${p.start}" data-pk-time="${p.day}" aria-label="وقت بداية حصة ${p.day}">
+      <select data-pk-dur="${p.day}" aria-label="مدة حصة ${p.day}">${durOpts(Number(p.mins))}</select>
+      <button type="button" class="slot-rm" data-pk-rm="${p.day}" title="إزالة اليوم"><i data-lucide="x"></i></button>
+    </div>`).join(''):'<div class="pk-empty">اختر يوماً واحداً على الأقل لتحديد موعد الحصة.</div>';
+    el('pkTools').style.display=list.length?'flex':'none';
+    iconRefresh();
+  }
+  function updateRowMeta(day){
+    const p=picked.find(x=>x.day===day);if(!p)return;
+    const endEl=rowsEl.querySelector(`[data-end="${day}"]`);
+    if(endEl)endEl.textContent=p.start?`حتى ${pkFmt12(pkAddMin(p.start,p.mins))} ${pkPeriod(pkAddMin(p.start,p.mins))}`:'حدد الوقت';
+    const row=rowsEl.querySelector(`[data-row="${day}"]`);if(row)row.classList.toggle('missing',!p.start&&!p.raw);
+    syncTargetFromPicked();
+    renderPreview();
+  }
+  function renderAllPk(){syncTargetFromPicked();renderDays();renderRows();renderPreview()}
+
+  if(defDurSel){
+    defDurSel.onchange=()=>{
+      const newMins=Math.round(Number(defDurSel.value)*60);
+      picked.forEach(p=>{p.mins=newMins});
+      renderAllPk();
+    };
+  }
+  daysEl.onclick=e=>{
+    const b=e.target.closest('[data-pk-day]');if(!b)return;const d=b.dataset.pkDay;
+    if(picked.some(p=>p.day===d))picked=picked.filter(p=>p.day!==d);
+    else{const last=sortedPicked().find(p=>p.start);picked.push({day:d,start:last?last.start:'17:00',mins:last?last.mins:Math.round(Number(el('pkDefDur').value)*60),raw:''})}
+    renderAllPk();
+  };
+  rowsEl.oninput=e=>{
+    const t=e.target;
+    if(t.dataset.pkTime){const p=picked.find(x=>x.day===t.dataset.pkTime);if(p){p.start=t.value;p.raw='';updateRowMeta(p.day)}}
+    if(t.dataset.pkDur){const p=picked.find(x=>x.day===t.dataset.pkDur);if(p){p.mins=Number(t.value);updateRowMeta(p.day)}}
+  };
+  rowsEl.onchange=rowsEl.oninput;
+  rowsEl.onclick=e=>{const b=e.target.closest('[data-pk-rm]');if(b){picked=picked.filter(p=>p.day!==b.dataset.pkRm);renderAllPk()}};
+  el('pkTools').onclick=e=>{
+    if(e.target.closest('[data-pk-copy]')){const first=sortedPicked().find(p=>p.start);if(!first){toast('حدد وقت أول يوم أولاً');return}picked.forEach(p=>{p.start=first.start;p.mins=first.mins;p.raw=''});renderAllPk()}
+    if(e.target.closest('[data-pk-clear]')){picked=[];renderAllPk()}
+  };
+  prevEl.onclick=e=>{const b=e.target.closest('[data-pk-apply]');if(b){el('pkTarget').value=b.dataset.pkApply;el('pkTarget').dataset.manual='1';toast('تم تحديث الباقة الشهرية حسب الجدول')}};
+  renderAllPk();
+}
+function timeSort(t){const m=String(t).match(/(\d{1,2}):(\d{2})/);return m?Number(m[1])*100+Number(m[2]):0}
+function getDateForActiveMonth(){
+  const todayStr=new Date().toISOString().slice(0,10);
+  return todayStr.startsWith(appState.currentMonth)?todayStr:`${appState.currentMonth}-15`;
+}
+function quickLogSessionInstant(studentId,duration,slotDay){
+  const s=appState.students.find(x=>x.id===studentId);
+  if(!s)return;
+  const dur=Number(duration)||Number(s.defaultDuration??s.default_duration)||0.5;
+  const rate=Number(s.rate)||monthRate(s.academy);
+  const dateVal=getDateForActiveMonth();
+  appState.sessions.unshift({
+    id:'ses_'+Date.now(),
+    studentId:s.id,
+    studentName:s.name,
+    academy:s.academy,
+    month:appState.currentMonth,
+    date:dateVal,
+    slotDay:slotDay||undefined,
+    duration:dur,
+    rate:rate,
+    amount:dur*rate,
+    notes:'حصة مسجلة',
+    createdAt:new Date().toISOString()
+  });
+  renderAll();
+  saveState();
+  toast(`تم تسجيل ${Math.round(dur*60)} د لـ ${s.name} (+${money(dur*rate)} ج.م)`);
+}
+function logSession(studentId,duration){const s=appState.students.find(x=>x.id===studentId);if(!s)return;const d=Number(duration)||Number(s.defaultDuration??s.default_duration)||.5;const date=getDateForActiveMonth();openModal('تسجيل حصة مخصصة',`<div class="form-grid"><div class="form-group full"><label>الطالب</label><input value="${esc(s.name)} — ${academyName(s.academy)}" disabled></div><div class="form-group"><label>تاريخ الحصة</label><input name="date" type="date" required value="${date}"></div><div class="form-group"><label>مدة الحصة</label><select name="duration"><option value=".5" ${d===.5?'selected':''}>30 دقيقة</option><option value=".75" ${d===.75?'selected':''}>45 دقيقة</option><option value="1" ${d===1?'selected':''}>60 دقيقة</option><option value="1.5" ${d===1.5?'selected':''}>90 دقيقة</option><option value="2" ${d===2?'selected':''}>120 دقيقة</option></select></div><div class="form-group full"><label>ملاحظات (اختياري)</label><textarea name="notes" rows="2" placeholder="مثال: تسميع + مراجعة..."></textarea></div><div class="form-group full"><label>القيمة التقديرية</label><input value="${money(d*s.rate)} ج.م" disabled></div></div>`,`تسجيل الحصة`,fd=>{const dur=Number(fd.get('duration')),dateVal=fd.get('date');appState.sessions.unshift({id:'ses_'+Date.now(),studentId:s.id,studentName:s.name,academy:s.academy,month:String(dateVal||'').slice(0,7),date:dateVal,duration:dur,rate:Number(s.rate)||monthRate(s.academy),amount:dur*(Number(s.rate)||monthRate(s.academy)),notes:fd.get('notes')||'حصة مسجلة',createdAt:new Date().toISOString()});closeModal();renderAll();saveState();toast('تم تسجيل الحصة وحفظها في JSON')})}
+function customSessionModal(){const opts=appState.students.map(s=>`<option value="${esc(s.id)}">${esc(s.name)} — ${academyName(s.academy)}</option>`).join('');openModal('إضافة حصة يدوياً',`<div class="form-grid"><div class="form-group full"><label>الطالب</label><select name="studentId" required>${opts}</select></div><div class="form-group"><label>التاريخ</label><input name="date" type="date" required value="${getDateForActiveMonth()}"></div><div class="form-group"><label>المدة (بالدقائق)</label><input name="minutes" type="number" min="1" value="30" required></div><div class="form-group full"><label>ملاحظات</label><textarea name="notes" rows="2"></textarea></div></div>`,`إضافة الحصة`,fd=>{const s=appState.students.find(x=>x.id===fd.get('studentId'));if(!s)return;const dur=Number(fd.get('minutes'))/60,dateVal=fd.get('date');appState.sessions.unshift({id:'ses_'+Date.now(),studentId:s.id,studentName:s.name,academy:s.academy,month:String(dateVal||'').slice(0,7),date:dateVal,duration:dur,rate:Number(s.rate)||60,amount:dur*(Number(s.rate)||60),notes:fd.get('notes')||'حصة مسجلة',createdAt:new Date().toISOString()});closeModal();renderAll();saveState();toast('تمت إضافة الحصة وحفظها في JSON')})}
+function limitsModal(){const html=Object.keys(ACADEMIES).map(k=>`<div class="form-group"><label>${academyName(k)} — الحد الشهري بالساعات</label><input type="number" min="0" step=".5" name="${k}_hours" value="${monthLimit(k)}"></div><div class="form-group"><label>${academyName(k)} — سعر الساعة (ج.م)</label><input type="number" min="0" name="${k}_rate" value="${monthRate(k)}"></div>`).join('');openModal('الحدود والأسعار',`<div class="form-grid">${html}</div>`,`حفظ الإعدادات`,fd=>{for(const k of Object.keys(ACADEMIES)){const newRate=Number(fd.get(k+'_rate'))||60;appState.limits[appState.currentMonth][k]={targetHours:Number(fd.get(k+'_hours'))||0,defaultRate:newRate};appState.students.forEach(s=>{if(s.academy===k)s.rate=newRate})}closeModal();renderAll();saveState();toast('تم تحديث الحدود والأسعار في JSON')})}
+function deleteSession(id){if(!confirm('هل تريد حذف هذه الحصة؟'))return;appState.sessions=appState.sessions.filter(x=>x.id!==id);renderAll();saveState();toast('تم حذف الحصة وتحديث JSON')}
+function resetMonth(){if(!confirm('سيتم حذف جميع حصص الشهر الحالي فقط. هل تريد المتابعة؟'))return;appState.sessions=appState.sessions.filter(x=>String(x.month||x.date||'').slice(0,7)!==appState.currentMonth);renderAll();saveState();toast('تم تصفير حصص الشهر الحالي وتحديث JSON')}
+function exportCSV(){const rows=[['Date','Student','Academy','Duration Hours','Amount EGP','Notes'],...monthSessions().map(x=>[x.date,x.studentName||studentName(x.studentId),academyName(x.academy),x.duration,x.amount||x.duration*(x.rate||60),x.notes||''])];const csv='\ufeff'+rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');downloadBlob(csv,'dr-araby-sessions-'+appState.currentMonth+'.csv','text/csv;charset=utf-8');toast('تم تجهيز ملف CSV')}
+function downloadBlob(content,name,type){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
+function backup(){const dbObj=buildJsonDatabaseObject();downloadBlob(JSON.stringify(dbObj,null,4),'dashboard_data.json','application/json');toast('تم تنزيل ملف dashboard_data.json المحدث')}
+function downloadCloudflareHTML(){
+  recalcAcademyLimits();
+  let src='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+  src=src.replace(/const DEFAULT_ACADEMIES=\{[^\n]*\};/,`const DEFAULT_ACADEMIES=${JSON.stringify(ACADEMIES)};`);
+  src=src.replace(/const INITIAL_LIMITS = \{[^\n]*\};/,`const INITIAL_LIMITS = ${JSON.stringify(appState.limits)};`);
+  src=src.replace(/const INITIAL_STUDENTS = \[[^\n]*\];/,`const INITIAL_STUDENTS = ${JSON.stringify(appState.students)};`);
+  src=src.replace(/const INITIAL_SESSIONS = \[[^\n]*\];/,`const INITIAL_SESSIONS = ${JSON.stringify(appState.sessions)};`);
+  downloadBlob(src,'index.html','text/html;charset=utf-8');
+  toast('تم تنزيل index.html المحدث! ارفعه الآن على Cloudflare Pages عبر Create new deployment');
+}
+function restore(file){const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(reader.result);if(!Array.isArray(data.students)||!Array.isArray(data.sessions))throw Error();if(!confirm('سيتم تحديث قاعدة البيانات بالملف المختار. متابعة؟'))return;applyJsonDatabaseObject(data);ensureMonth();renderAll();saveState();toast('تم استيراد وتحديث قاعدة بيانات JSON بنجاح')}catch(e){alert('ملف JSON غير صالح أو غير متوافق')}};reader.readAsText(file)}
+
+async function connectLocalJsonFile(){
+  if(!window.showOpenFilePicker){
+    backup();
+    return;
+  }
+  try{
+    const [handle]=await window.showOpenFilePicker({
+      types:[{description:'JSON Database',accept:{'application/json':['.json']}}],
+      multiple:false
+    });
+    if(!handle)return;
+    jsonFileHandle=handle;
+    idbStoreHandle(handle);
+    const file=await handle.getFile();
+    const text=await file.text();
+    const parsed=JSON.parse(text);
+    applyJsonDatabaseObject(parsed);
+    renderAll();
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(appState));
+    updateDbIndicator('file',`مرتبط بـ ${file.name} ✓`);
+    toast(`تم ربط ملف ${file.name} للقراءة والكتابة المباشرة!`);
+  }catch(err){
+    if(err&&err.name!=='AbortError')alert('تعذر ربط ملف JSON');
+  }
+}
+
+async function readFromJsonDatabase(showMsg){
+  if(jsonFileHandle){
+    try{
+      const file=await jsonFileHandle.getFile();
+      const json=JSON.parse(await file.text());
+      applyJsonDatabaseObject(json);
+      renderAll();
+      localStorage.setItem(STORAGE_KEY,JSON.stringify(appState));
+      updateDbIndicator('file',`مرتبط بـ ${file.name} ✓`);
+      if(showMsg)toast('تمت قراءة أحدث البيانات من ملف JSON');
+      return true;
+    }catch(_){}
+  }
+  try{
+    const res=await fetch('dashboard_data.json?t='+Date.now(),{cache:'no-store'});
+    if(res.ok){
+      const json=await res.json();
+      let hasServerWrite=false;
+      try{
+        const ping=await fetch('/api/save',{method:'OPTIONS'});
+        if(ping.ok){
+          serverApiAvailable=true;
+          hasServerWrite=true;
+          updateDbIndicator('server','متصل بـ dashboard_data.json ✓');
+        }
+      }catch(_){}
+      const localHasNewer=!showMsg&&appState.updatedAt&&(!json.updatedAt||appState.updatedAt>json.updatedAt);
+      if(!localHasNewer){
+        applyJsonDatabaseObject(json);
+        localStorage.setItem(STORAGE_KEY,JSON.stringify(appState));
+        renderAll();
+      }else if(hasServerWrite){
+        writeToJsonDatabase();
+      }
+      if(showMsg)toast('تمت قراءة أحدث البيانات من dashboard_data.json');
+      return true;
+    }
+  }catch(_){}
+  if(showMsg){
+    connectLocalJsonFile();
+  }
+  return false;
+}
+
+document.addEventListener('click',e=>{
+  const editAc=e.target.closest('[data-edit-academy]');if(editAc){e.stopPropagation();academyModal(editAc.dataset.editAcademy);return;}
+  const delAc=e.target.closest('[data-delete-academy]');if(delAc){e.stopPropagation();deleteAcademy(delAc.dataset.deleteAcademy);return;}
+  const nav=e.target.closest('[data-page]');if(nav)switchPage(nav.dataset.page);
+  const ac=e.target.closest('[data-academy]');if(ac)switchPage('students',ac.dataset.academy);
+  const go=e.target.closest('[data-goto]');if(go)switchPage(go.dataset.goto);
+  const qlog=e.target.closest('[data-quick-log]');if(qlog){e.stopPropagation();quickLogSessionInstant(qlog.dataset.quickLog,qlog.dataset.duration,qlog.dataset.slotDay);return;}
+  const tstat=e.target.closest('[data-toggle-status]');if(tstat){e.stopPropagation();toggleStudentStatus(tstat.dataset.toggleStatus);return;}
+  const log=e.target.closest('[data-log]');if(log){e.stopPropagation();logSession(log.dataset.log,log.dataset.duration);return;}
+  const edit=e.target.closest('[data-edit]');if(edit){e.stopPropagation();const s=appState.students.find(x=>x.id===edit.dataset.edit);if(s)studentModal(s);return;}
+  const delStu=e.target.closest('[data-delete-student]');if(delStu){e.stopPropagation();deleteStudent(delStu.dataset.deleteStudent);return;}
+  const del=e.target.closest('[data-delete-session]');if(del)deleteSession(del.dataset.deleteSession);
+});
+el('menuBtn').onclick=toggleSidebar;
+el('sidebarCloseBtn').onclick=closeSidebar;
+el('sidebarOverlay').onclick=closeSidebar;
+window.addEventListener('resize',syncSidebarUI);
+el('jsonDbBtn').onclick=()=>connectLocalJsonFile();
+el('reloadJsonBtn').onclick=()=>readFromJsonDatabase(true);
+if(el('addAcademyTop'))el('addAcademyTop').onclick=()=>academyModal();
+if(el('addAcademySidebar'))el('addAcademySidebar').onclick=()=>academyModal();
+if(el('addAcademyOverview'))el('addAcademyOverview').onclick=()=>academyModal();
+el('addStudentTop').onclick=()=>studentModal();
+el('addStudentPage').onclick=()=>studentModal();
+el('settingsBtn').onclick=limitsModal;
+el('editLimits').onclick=limitsModal;
+el('manualSession').onclick=customSessionModal;
+el('monthSelector').onchange=e=>{appState.currentMonth=e.target.value;ensureMonth();renderAll();saveState()};
+el('themeBtn').onclick=()=>{appState.darkMode=!appState.darkMode;setTheme();saveState()};
+el('studentSearch').oninput=renderStudents;
+if(el('statusFilter'))el('statusFilter').onchange=renderStudents;
+el('academyFilter').onchange=renderStudents;
+el('dayFilter').onchange=renderStudents;
+el('scheduleAcademyFilter').onchange=renderSchedule;
+if(el('analyticsAcademyFilter'))el('analyticsAcademyFilter').onchange=renderAnalytics;
+el('logAcademyFilter').onchange=renderSessions;
+el('sessionSearch').oninput=renderSessions;
+el('overviewSearch').oninput=renderOverview;
+el('exportCsv').onclick=exportCSV;
+if(el('cloudflareBtn'))el('cloudflareBtn').onclick=downloadCloudflareHTML;
+el('backupBtn').onclick=backup;
+el('restoreFile').onchange=e=>{if(e.target.files[0])restore(e.target.files[0]);e.target.value=''};
+el('resetMonth').onclick=resetMonth;
+el('closeModal').onclick=closeModal;
+el('cancelModal').onclick=closeModal;
+el('modalBackdrop').onclick=e=>{if(e.target===el('modalBackdrop'))closeModal()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+(async function init(){
+  if(appState.sidebarClosed&&!isMobileViewport()){
+    document.body.classList.add('sidebar-closed');
+  }
+  renderAll();
+  const savedHandle=await idbLoadHandle();
+  if(savedHandle){
+    try{
+      const perm=await savedHandle.queryPermission({mode:'readwrite'});
+      if(perm==='granted'){
+        jsonFileHandle=savedHandle;
+      }
+    }catch(_){}
+  }
+  await readFromJsonDatabase(false);
+  isInitializing=false;
+})();
+</script>
+</body>
+</html>
